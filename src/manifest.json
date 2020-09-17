@@ -1,7 +1,7 @@
 {
-  "name": "Teste 1 - Caixa ALta",
+  "name": "MangaBookmark",
   "version": "1.0",
-  "description": "Transforma uma seleção em caixa alta",
+  "description": "Registra os Mangás e capítulos",
   "browser_action": {
     "default_popup": "index.html"
   },
