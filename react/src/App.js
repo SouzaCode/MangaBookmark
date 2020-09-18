@@ -3,11 +3,6 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import List from "./components/list/list";
 function App() {
-  const [newManga, setNewManga] = useState({
-    id: null,
-    nome: "",
-    cap: "",
-  });
   const [mangaData, setMangaData] = useState([
     {
       id: 0,
@@ -25,29 +20,25 @@ function App() {
       cap: 3,
     },
   ]);
+  const [newName, setNewName] = useState("");
+  const [newCap, setNewCap] = useState();
   function handleNew() {
     setIsCreatingNew(true);
   }
   function handleSubmitNew(e) {
     e.preventDefault();
-    let aux = mangaData;
-    let newAux = newManga;
-    console.log(newAux);
+    let aux = {
+      id: mangaData.length,
+      nome: newName,
+      cap: newCap,
+    };
+    let newAux = mangaData;
+    console.log(aux);
+    newAux.push(aux);
+    setMangaData(newAux);
     setIsCreatingNew(false);
-    newManga.id = aux[aux.length - 1].id + 1;
-    aux.push(newAux);
-    console.log(newAux);
   }
-  function handleChangeName(name) {
-    let aux = newManga;
-    aux.nome = name;
-    setNewManga(aux);
-  }
-  function handleChangeCap(cap) {
-    let aux = newManga;
-    aux.cap = cap;
-    setNewManga(aux);
-  }
+
   const [isCreatingNew, setIsCreatingNew] = useState(false);
   return (
     <div className="App">
@@ -66,13 +57,13 @@ function App() {
           <div className="creatingNew">
             <input
               type="text"
-              onChange={(e) => handleChangeName(e.target.value)}
+              onChange={(e) => setNewName(e.target.value)}
               name="manga"
               placeholder="manga name"
             ></input>
             <input
               type="number"
-              onChange={(e) => handleChangeCap(e.target.value)}
+              onChange={(e) => setNewCap(parseInt(e.target.value))}
               name="chapter"
               placeholder="chapter"
             />
