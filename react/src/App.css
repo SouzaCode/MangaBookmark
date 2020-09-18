@@ -10,7 +10,9 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.app-title {
+  text-align: center;
+}
 .App-link {
   color: #61dafb;
 }
@@ -23,4 +25,15 @@
 }
 .newmanga {
   max-height: fit-content;
+}
+form {
+  display: flex;
+  flex-direction: row;
+}
+input {
+  max-width: 150px;
+}
+.creatingNew {
+  display: flex;
+  flex-direction: column;
 }

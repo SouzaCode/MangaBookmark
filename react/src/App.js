@@ -33,7 +33,6 @@ function App() {
       cap: newCap,
     };
     let newAux = mangaData;
-    console.log(aux);
     newAux.push(aux);
     setMangaData(newAux);
     setIsCreatingNew(false);
@@ -43,36 +42,42 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <small>Meus Bookmarks</small>
-        {!isCreatingNew && (
+        <small className="app-title">Meus Bookmarks</small>
+        {!isCreatingNew ? (
           <div className="createN">
             <button onClick={handleNew} className="text-new">
               Adicionar Novo
             </button>
           </div>
+        ) : (
+          <form onSubmit={handleSubmitNew}>
+            <div className="creatingNew">
+              <input
+                type="text"
+                onChange={(e) => setNewName(e.target.value)}
+                name="manga"
+                placeholder="manga name"
+              ></input>
+              <input
+                type="number"
+                onChange={(e) => setNewCap(parseInt(e.target.value))}
+                name="chapter"
+                placeholder="chapter"
+              />
+            </div>
+            <button className="newmanga" type="submit">
+              +
+            </button>
+            <button
+              className="canceladd"
+              onClick={() => setIsCreatingNew(false)}
+            >
+              close
+            </button>
+          </form>
         )}
       </header>
-      {isCreatingNew && (
-        <form onSubmit={handleSubmitNew}>
-          <div className="creatingNew">
-            <input
-              type="text"
-              onChange={(e) => setNewName(e.target.value)}
-              name="manga"
-              placeholder="manga name"
-            ></input>
-            <input
-              type="number"
-              onChange={(e) => setNewCap(parseInt(e.target.value))}
-              name="chapter"
-              placeholder="chapter"
-            />
-          </div>
-          <button className="newmanga" type="submit">
-            +
-          </button>
-        </form>
-      )}
+
       <List mangaData={mangaData} setMangaData={setMangaData} />
     </div>
   );
