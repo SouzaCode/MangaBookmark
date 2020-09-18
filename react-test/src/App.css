@@ -1,0 +1,16 @@
+.App {
+  margin: 16px;
+  text-align: left;
+}
+
+.App-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
