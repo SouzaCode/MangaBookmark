@@ -1,9 +1,0 @@
-{
-  "name": "MangaBookmark",
-  "version": "1.0",
-  "description": "Registra os Mangás e capítulos no google drive e mostra na extensão",
-  "browser_action": {
-    "default_popup": "index.html"
-  },
-  "manifest_version": 2
-}
