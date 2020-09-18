@@ -1,25 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./list.css";
 
-function List() {
-  const [mangaData, setMangaData] = useState([
-    {
-      id: 0,
-      nome: "Boku no Hero",
-      cap: 9,
-    },
-    {
-      id: 1,
-      nome: "Tensei shittara",
-      cap: 1,
-    },
-    {
-      id: 2,
-      nome: "Solo Leveling",
-      cap: 3,
-    },
-  ]);
-
+function List({ mangaData, setMangaData }) {
   function handleAdd(id) {
     setMangaData(
       mangaData.map((manga) => {
@@ -41,18 +23,18 @@ function List() {
     );
   }
   return (
-    <div className="list-body">
+    <div classNameName="list-body">
       {mangaData.map((manga) => (
-        <div class="item">
-          <p class="name">
+        <div className="item">
+          <p className="name">
             {manga.id} - {manga.nome}
           </p>
-          <div class="cap">
-            <small class="ncap">Cap. {manga.cap}</small>
-            <button onClick={() => handleAdd(manga.id)} class="op add">
+          <div className="cap">
+            <small className="ncap">Cap. {manga.cap}</small>
+            <button onClick={() => handleAdd(manga.id)} className="op add">
               +
             </button>
-            <button onClick={() => handleSub(manga.id)} class="op sub">
+            <button onClick={() => handleSub(manga.id)} className="op sub">
               -
             </button>
           </div>
