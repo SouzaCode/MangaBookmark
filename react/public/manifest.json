@@ -8,5 +8,5 @@
     "default_title": "Test React EXT",
     "default_icon": "logo192.png"
   },
-  "permissions": []
+  "permissions": ["storage"]
 }

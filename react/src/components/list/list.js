@@ -22,12 +22,22 @@ function List({ mangaData, setMangaData }) {
       })
     );
   }
+  function handleRemove(id) {
+    setMangaData(
+      mangaData.filter((manga) => {
+        return manga.id != id;
+      })
+    );
+  }
   return (
     <div classNameName="list-body">
       {mangaData.map((manga) => (
         <div className="item">
           <p className="name">
-            {manga.id} - {manga.nome}
+            <button className="remove" onClick={() => handleRemove(manga.id)}>
+              x
+            </button>
+            {manga.nome}
           </p>
           <div className="cap">
             <small className="ncap">Cap. {manga.cap}</small>
