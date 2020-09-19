@@ -17,7 +17,15 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "env": {
+      "webextensions": true
+  },
+    "globals": {
+      "chrome": true,
+      "storage": true,
+      "sync": true
+    }
   },
   "browserslist": {
     "production": [

@@ -3,25 +3,27 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import List from "./components/list/list";
 function App() {
-  const [mangaData, setMangaData] = useState([
-    {
-      id: 0,
-      nome: "Boku no Hero",
-      cap: 9,
-    },
-    {
-      id: 1,
-      nome: "Tensei shittara",
-      cap: 1,
-    },
-    {
-      id: 2,
-      nome: "Solo Leveling",
-      cap: 3,
-    },
-  ]);
+  const [isCreatingNew, setIsCreatingNew] = useState(false);
+  const [mangaData, setMangaData] = useState([]);
   const [newName, setNewName] = useState("");
   const [newCap, setNewCap] = useState();
+  useEffect(() => {
+    chrome.storage.sync.get(["mangaData"], function (r) {
+      let data;
+      if (r.mangaData === undefined) {
+        chrome.storage.sync.set({ mangaData: [] }, function () {});
+        data = [];
+      } else {
+        console.log(r.mangaData);
+        data = r.mangaData;
+      }
+      setMangaData(data);
+    });
+  }, []);
+  useEffect(() => {
+    console.log(mangaData);
+    chrome.storage.sync.set({ mangaData: mangaData }, function () {});
+  }, [mangaData]);
   function handleNew() {
     setIsCreatingNew(true);
   }
@@ -35,10 +37,10 @@ function App() {
     let newAux = mangaData;
     newAux.push(aux);
     setMangaData(newAux);
+    chrome.storage.sync.set({ mangaData: newAux }, function () {});
     setIsCreatingNew(false);
   }
 
-  const [isCreatingNew, setIsCreatingNew] = useState(false);
   return (
     <div className="App">
       <header className="App-header">
