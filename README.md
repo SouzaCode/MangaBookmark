@@ -8,5 +8,13 @@ Only and exclusively because I am irritated by being unable to remember, shout o
 
 ## How it works
 
-At the moment it will be saving the data locally in the local storage of the browser, but in the future, the goal is to save the data at the user's Google Drive, and keep it sync.
+It saves the information of your manga list at your google sync storage
 
+## How to get it?
+
+Since i have to pay R\$30,00 to publish it at google webstore, you can get it from this git.
+
+-Dowload this project and run - \$ npm run-script build
+
+- Go to the extension manager tab at chrome an let the dev option active
+- load the build folder and be happy
