@@ -1,11 +1,11 @@
 {
   "short_name": "Chrome ext",
-  "name": "My Chrome EXT",
+  "name": "MangaBookmark",
   "manifest_version": 2,
   "version": "1.0",
   "browser_action": {
     "default_popup": "index.html",
-    "default_title": "Test React EXT",
+    "default_title": "MangaBookmark",
     "default_icon": "logo192.png"
   },
   "permissions": ["storage"]
