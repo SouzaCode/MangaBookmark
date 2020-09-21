@@ -15,6 +15,7 @@ It saves the information of your manga list at your google sync storage
 Since i have to pay R\$30,00 to publish it at google webstore, you can get it from this git.
 
 - Dowload this project and run </br>
+       \$ npm i</br>
        \$ npm run-script build
 - Go to the extension manager tab at chrome an let the dev option active
 - load the build folder and be happy
