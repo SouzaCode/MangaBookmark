@@ -18,4 +18,4 @@ Since i have to pay R\$30,00 to publish it at google webstore, you can get it fr
        \$ npm i</br>
        \$ npm run-script build
 - Go to the extension manager tab at chrome an let the dev option active
-- load the build folder and be happy
+- "load unpacked" the build folder and be happy
