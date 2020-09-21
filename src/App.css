@@ -1,0 +1,39 @@
+.App {
+  margin: 16px;
+  text-align: left;
+}
+
+.App-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.app-title {
+  text-align: center;
+}
+.App-link {
+  color: #61dafb;
+}
+.createN {
+  display: flex;
+  flex-direction: row;
+}
+.text-new {
+  font-size: 12pt;
+}
+.newmanga {
+  max-height: fit-content;
+}
+form {
+  display: flex;
+  flex-direction: row;
+}
+input {
+  max-width: 150px;
+}
+.creatingNew {
+  display: flex;
+  flex-direction: column;
+}
