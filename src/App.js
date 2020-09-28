@@ -32,7 +32,7 @@ function App() {
     let aux = {
       id: mangaData.length,
       nome: newName,
-      cap: newCap,
+      cap: newCap != undefined ? newCap : 0,
     };
     let newAux = mangaData;
     newAux.push(aux);
