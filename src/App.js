@@ -31,7 +31,7 @@ function App() {
     e.preventDefault();
     let aux = {
       id: mangaData.length,
-      nome: newName,
+      nome: newName != undefined ? newName : "NO NAME",
       cap: newCap != undefined ? newCap : 0,
     };
     let newAux = mangaData;
