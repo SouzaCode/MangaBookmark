@@ -9,7 +9,7 @@ small.ncap {
   margin-right: 15px;
 }
 p.name {
-  max-width: 25ch;
+  max-width: 30ch;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
