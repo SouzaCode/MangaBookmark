@@ -36,9 +36,9 @@ You can transfer ANY quantity you want to onde of my addresses bellow 🥰
 
 Paypal:
 
-[![](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p2.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEFYEJDSJTG7W"><img src="https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p2.png)
+[![](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p2.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEFYEJDSJTG7W"><img src="https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p3.png)
 
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEFYEJDSJTG7W"><img src="https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p2.png" /></a>
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEFYEJDSJTG7W"><img src="https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p3.png" /></a>
 
 or
 
