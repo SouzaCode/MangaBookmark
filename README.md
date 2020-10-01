@@ -38,8 +38,6 @@ Paypal:
 
 [![](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p3.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEFYEJDSJTG7W")
 
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEFYEJDSJTG7W"><img src="https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p3.png" /></a>
-
 or
 
 ![alt text](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/QR%20Code.png)
