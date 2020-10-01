@@ -36,16 +36,13 @@ You can transfer ANY quantity you want to onde of my addresses bellow 🥰
 
 Paypal:
 
-<html>
-<body>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick" />
-<input type="hidden" name="hosted_button_id" value="PEFYEJDSJTG7W" />
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-<img alt="" border="0" src="https://www.paypal.com/en_BR/i/scr/pixel.gif" width="1" height="1" />
-</form>
-</body>
-</html>
+[![](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p2.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEFYEJDSJTG7W"><img src="https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p2.png)
+
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEFYEJDSJTG7W"><img src="https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p2.png" /></a>
+
+or
+
+![alt text](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/QR_Code.png)
 
 Bitcoin: 3EcS6jC3LEu6TxrGf1gy6RDU84JUeigHPS
 
