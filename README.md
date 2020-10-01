@@ -32,7 +32,7 @@ It saves the information of your manga list at your google sync storage, so if y
 
 Oh thats awesome!! Thank you!
 
-You can transfer ANY quantity you want to onde of my addresses bellow 🥰
+You can transfer ANY quantity you want to one of my addresses bellow 🥰
 
 Paypal:
 
