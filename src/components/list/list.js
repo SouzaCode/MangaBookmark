@@ -32,10 +32,12 @@ function List({ mangaData, setMangaData }) {
     );
   }
   function handleDragEnd(param) {
+    console.log(param);
     const src = param.source.index;
     const dest = param.destination.index;
     let list = mangaData;
     list.splice(dest, 0, list.splice(src, 1)[0]);
+    console.log(list);
     setMangaData(list);
     chrome.storage.sync.set({ mangaData: mangaData }, function () {});
   }

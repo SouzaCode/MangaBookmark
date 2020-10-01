@@ -30,9 +30,14 @@ function App() {
   }
   function handleSubmitNew(e) {
     e.preventDefault();
+
     let aux = {
-      id: mangaData.length,
-      nome: newName != undefined ? newName : "NO NAME",
+      id:
+        mangaData.reduce((max, num) => {
+          num.id > max ? (max = num.id) : (max = max);
+          return max;
+        }, 0) + 2,
+      nome: newName ? newName : "NO NAME",
       cap: newCap != undefined ? newCap : 0,
     };
     let newAux = mangaData;
