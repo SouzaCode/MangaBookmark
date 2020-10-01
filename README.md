@@ -36,7 +36,7 @@ You can transfer ANY quantity you want to onde of my addresses bellow 🥰
 
 Paypal:
 
-[![](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p3.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEFYEJDSJTG7W")      or      ![alt text](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/QR%20Code.png)
+[![](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p3.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEFYEJDSJTG7W") &nbsp;&nbsp; &nbsp;&nbsp;or &nbsp;&nbsp; &nbsp;&nbsp;![alt text](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/QR%20Code.png)
 
 Bitcoin: 3EcS6jC3LEu6TxrGf1gy6RDU84JUeigHPS
 
