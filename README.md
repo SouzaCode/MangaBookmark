@@ -26,7 +26,7 @@ It saves the information of your manga list at your google sync storage, so if y
 
        (I'll try to let it prettier in the future, feel free to suggest a new design 🥰)
 
-![alt text](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p2.png)
+![alt text](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p2.png) &nbsp;&nbsp; &nbsp;&nbsp; ![alt text](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p4.png)
 
 # Want to donate and help the development?
 
