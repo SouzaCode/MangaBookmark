@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import List from "./components/list/list";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+
 function App() {
   const [isCreatingNew, setIsCreatingNew] = useState(false);
   const [mangaData, setMangaData] = useState([]);
@@ -53,9 +56,9 @@ function App() {
         <small className="app-title">Meus Bookmarks</small>
         {!isCreatingNew ? (
           <div className="createN">
-            <button onClick={handleNew} className="text-new">
-              Adicionar Novo
-            </button>
+            <a onClick={handleNew} className="text-new">
+              <FontAwesomeIcon icon={faPlusCircle} /> Novo
+            </a>
           </div>
         ) : (
           <form onSubmit={handleSubmitNew}>
