@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./list.css";
 
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 function List({ mangaData, setMangaData }) {
   function handleAdd(id) {
@@ -32,12 +34,10 @@ function List({ mangaData, setMangaData }) {
     );
   }
   function handleDragEnd(param) {
-    console.log(param);
     const src = param.source.index;
     const dest = param.destination.index;
     let list = mangaData;
     list.splice(dest, 0, list.splice(src, 1)[0]);
-    console.log(list);
     setMangaData(list);
     chrome.storage.sync.set({ mangaData: mangaData }, function () {});
   }
@@ -76,12 +76,12 @@ function List({ mangaData, setMangaData }) {
                     }}
                   >
                     <p className="name" {...provided.dragHandleProps}>
-                      <button
+                      <a
                         className="remove"
                         onClick={() => handleRemove(manga.id)}
                       >
-                        x
-                      </button>
+                        <FontAwesomeIcon icon={faTrashAlt} />
+                      </a>
                       {manga.nome}
                     </p>
                     <div className="cap">

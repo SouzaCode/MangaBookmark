@@ -14,3 +14,25 @@ p.name {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.remove {
+  background-color: #ed2139;
+  border-radius: 2px;
+  border: 1px solid #000000;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 10px;
+  padding: 6px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #000000;
+  margin-right: 5px;
+}
+.remove:hover {
+  background-color: #932a1e;
+}
+.remove:active {
+  position: relative;
+  top: 1px;
+}
