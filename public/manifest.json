@@ -2,7 +2,7 @@
   "short_name": "Chrome ext",
   "name": "MangaBookmark",
   "manifest_version": 2,
-  "version": "1.1.0",
+  "version": "0.9.9",
   "browser_action": {
     "default_popup": "index.html",
     "default_title": "MangaBookmark",
