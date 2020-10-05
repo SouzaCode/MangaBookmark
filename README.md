@@ -8,13 +8,21 @@ Only and exclusively because I am frustrated by being unable to remember the nam
 
 # How to get it?
 
-This will be published as a paid extension for chrome, BUT I like free things and I want you to use my extension as you please, so you can get it from this git.
+You can use the chrome store link below, or, if yopu want faster updates, you can clone this git or get it from releases
+https://chrome.google.com/webstore/detail/mangabookmark/hclahhnkdechgledjlbjnldiakecdedg?utm_source=chrome-ntp-icon
 
 Download the most reacent version at realeases and install it.
 
-## Install
+## Install from releases
 
 - Unpackage the file
+- Go to the extension manager tab at chrome an let the dev option active
+- "load unpacked" the build folder and be happy
+
+## Intall from cloning
+
+- $ npm i
+- $ npm run build
 - Go to the extension manager tab at chrome an let the dev option active
 - "load unpacked" the build folder and be happy
 
