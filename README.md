@@ -9,7 +9,7 @@ Only and exclusively because I am frustrated by being unable to remember the nam
 # How to get it?
 
 You can use the chrome store link below, or, if yopu want faster updates, you can clone this git or get it from releases
-https://chrome.google.com/webstore/detail/mangabookmark/hclahhnkdechgledjlbjnldiakecdedg?utm_source=chrome-ntp-icon
+https://chrome.google.com/webstore/detail/manga-bookmark/hclahhnkdechgledjlbjnldiakecdedg?utm_source=chrome-ntp-icon
 
 Download the most reacent version at realeases and install it.
 
