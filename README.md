@@ -57,3 +57,8 @@ Dogecoin: D7t9nvfjj73M7kgxMNr35cD9XzCA6cbYsy
 Ethereum: 0x1fcb76c03a319bac659f64bb1f8199f0be3d233a
 
 Ripple: rnW8je5SsuFjkMSWkgfXvqZH3gLTpXxfFH
+
+
+# Follow me on my YouTube Channel
+
+https://www.youtube.com/channel/UCKuroQvLYe--kKd8kJ6GBYg?view_as=subscriber
