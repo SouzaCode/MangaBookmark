@@ -61,4 +61,4 @@ Ripple: rnW8je5SsuFjkMSWkgfXvqZH3gLTpXxfFH
 
 # Follow me on my YouTube Channel
 
-https://www.youtube.com/channel/UCKuroQvLYe--kKd8kJ6GBYg?view_as=subscriber
+https://www.youtube.com/channel/UCKuroQvLYe--kKd8kJ6GBYg
