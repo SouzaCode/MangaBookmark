@@ -102,7 +102,7 @@ function App() {
 
       <List mangaData={mangaData} setMangaData={setMangaData} />
 
-      <button onClick={() => downloadTxtFile()}>Download txt</button>
+      <button onClick={() => downloadTxtFile()}>Download Backup</button>
     </div>
   );
 }
