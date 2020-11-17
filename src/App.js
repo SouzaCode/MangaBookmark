@@ -50,6 +50,17 @@ function App() {
     setIsCreatingNew(false);
   }
 
+  function downloadTxtFile() {
+    const element = document.createElement("a");
+    const file = new Blob([JSON.stringify(mangaData)], {
+      type: "text/json",
+    });
+    element.href = URL.createObjectURL(file);
+    element.download = "backup.json";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -90,6 +101,8 @@ function App() {
       </header>
 
       <List mangaData={mangaData} setMangaData={setMangaData} />
+
+      <button onClick={() => downloadTxtFile()}>Download txt</button>
     </div>
   );
 }
