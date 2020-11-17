@@ -86,18 +86,18 @@ function List({ mangaData, setMangaData }) {
                     </p>
                     <div className="cap">
                       <small className="ncap">Cap. {manga.cap}</small>
-                      <button
+                      <a
                         onClick={() => handleAdd(manga.id)}
-                        className="op add"
+                        className="op add cantSelect"
                       >
                         +
-                      </button>
-                      <button
+                      </a>
+                      <a
                         onClick={() => handleSub(manga.id)}
-                        className="op sub"
+                        className="op sub cantSelect"
                       >
                         -
-                      </button>
+                      </a>
                     </div>
                   </div>
                 )}
