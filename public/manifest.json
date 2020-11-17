@@ -1,11 +1,11 @@
 {
-  "short_name": "Chrome ext",
-  "name": "MangaBookmark",
+  "short_name": "MangaB",
+  "name": "Manga Bookmark",
   "manifest_version": 2,
-  "version": "0.9.1",
+  "version": "0.9.10",
   "browser_action": {
     "default_popup": "index.html",
-    "default_title": "MangaBookmark",
+    "default_title": "Manga Bookmark",
     "default_icon": "logo_sf192b.png"
   },
   "icons": { "192": "logo_sf192b.png" },
