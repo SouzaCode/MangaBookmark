@@ -9,7 +9,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-function List({ mangaData, setMangaData, switchManga }) {
+function List({ mangaData, setMangaData, switchManga, gSync }) {
   const [changeAbaId, setChangeAbaId] = useState(null);
   function handleChangeAba(id) {
     changeAbaId === id ? setChangeAbaId(null) : setChangeAbaId(id);
@@ -47,7 +47,7 @@ function List({ mangaData, setMangaData, switchManga }) {
     let list = mangaData;
     list.splice(dest, 0, list.splice(src, 1)[0]);
     setMangaData(list);
-    chrome.storage.sync.set({ mangaData: mangaData }, function () {});
+    gSync(mangaData);
   }
   return (
     <DragDropContext
