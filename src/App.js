@@ -4,50 +4,101 @@ import "./App.css";
 import List from "./components/list/list";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle, faDownload } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [isCreatingNew, setIsCreatingNew] = useState(false);
   const [mangaData, setMangaData] = useState([]);
+  const [mangaWaitingData, setMangaWaitingData] = useState([]);
+  const [mangaLaterData, setMangaLaterData] = useState([]);
+  const [mangaFinishData, setMangaFinishData] = useState([]);
+
   const [newName, setNewName] = useState("");
   const [newCap, setNewCap] = useState();
-  useEffect(() => {
-    chrome.storage.sync.get(["mangaData"], function (r) {
+  const [selectedAba, setSelectedAba] = useState(0);
+
+  function getInitialData(dataName, mData, setFunc) {
+    console.log(mData);
+    chrome.storage.sync.get([dataName], function (r) {
       let data;
-      if (r.mangaData === undefined) {
-        chrome.storage.sync.set({ mangaData: [] }, function () {});
+      if (r[dataName] === undefined) {
+        chrome.storage.sync.set(mData, function () {});
         data = [];
       } else {
-        console.log(r.mangaData);
-        data = r.mangaData;
+        data = r[dataName];
       }
-      setMangaData(data);
+      setFunc(data);
     });
+  }
+  useEffect(() => {
+    getInitialData("mangaData", { mangaData: [] }, setMangaData);
+    getInitialData(
+      "mangaWaitingData",
+      { mangaWaitingData: [] },
+      setMangaWaitingData
+    );
+    getInitialData("mangaLaterData", { mangaLaterData: [] }, setMangaLaterData);
+    getInitialData(
+      "mangaFinishData",
+      { mangaFinishData: [] },
+      setMangaFinishData
+    );
   }, []);
   useEffect(() => {
-    console.log(mangaData);
     chrome.storage.sync.set({ mangaData: mangaData }, function () {});
   }, [mangaData]);
+  useEffect(() => {
+    chrome.storage.sync.set(
+      { mangaWaitingData: mangaWaitingData },
+      function () {}
+    );
+  }, [mangaWaitingData]);
+  useEffect(() => {
+    chrome.storage.sync.set({ mangaLaterData: mangaLaterData }, function () {});
+  }, [mangaLaterData]);
+  useEffect(() => {
+    chrome.storage.sync.set(
+      { mangaFinishData: mangaFinishData },
+      function () {}
+    );
+  }, [mangaFinishData]);
   function handleNew() {
     setIsCreatingNew(true);
   }
-  function handleSubmitNew(e) {
-    e.preventDefault();
-
+  function submitNew(dataName, setFunc, saveObj) {
+    let mData = saveObj[dataName];
     let aux = {
       id:
-        mangaData.reduce((max, num) => {
+        mData.reduce((max, num) => {
           num.id > max ? (max = num.id) : (max = max);
           return max;
         }, 0) + 2,
       nome: newName ? newName : "NO NAME",
       cap: newCap != undefined ? newCap : 0,
     };
-    let newAux = mangaData;
+    let newAux = mData;
     newAux.push(aux);
-    setMangaData(newAux);
-    chrome.storage.sync.set({ mangaData: newAux }, function () {});
+    setFunc(newAux);
+    saveObj[dataName] = newAux;
+    chrome.storage.sync.set(saveObj, function () {});
     setIsCreatingNew(false);
+  }
+  function handleSubmitNew(e) {
+    e.preventDefault();
+    if (selectedAba == 0)
+      submitNew("mangaData", setMangaData, { mangaData: mangaData });
+    if (selectedAba == 1)
+      submitNew("mangaWaitingData", setMangaWaitingData, {
+        mangaWaitingData: mangaWaitingData,
+      });
+    if (selectedAba == 2)
+      submitNew("mangaLaterData", setMangaLaterData, {
+        mangaLaterData: mangaLaterData,
+      });
+    if (selectedAba == 3)
+      submitNew("mangaFinishData", setMangaFinishData, {
+        mangaFinishData: mangaFinishData,
+      });
   }
 
   function downloadTxtFile() {
@@ -60,17 +111,25 @@ function App() {
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   }
+  function handleChangeAba(id) {
+    setSelectedAba(id);
+  }
 
   return (
     <div className="App">
       <header className="App-header">
         <small className="app-title">Meus Bookmarks</small>
         {!isCreatingNew ? (
-          <div className="createN">
-            <a onClick={handleNew} className="text-new">
-              <FontAwesomeIcon icon={faPlusCircle} /> Novo
+          <>
+            <a className="bckp-btn" onClick={() => downloadTxtFile()}>
+              <FontAwesomeIcon icon={faDownload} /> Backup
             </a>
-          </div>
+            <div className="createN">
+              <a onClick={handleNew} className="text-new">
+                <FontAwesomeIcon icon={faPlusCircle} /> New
+              </a>
+            </div>
+          </>
         ) : (
           <form onSubmit={handleSubmitNew}>
             <div className="creatingNew">
@@ -99,10 +158,45 @@ function App() {
           </form>
         )}
       </header>
+      <div className="menu cantSelect">
+        <div
+          onClick={() => handleChangeAba(0)}
+          className={"menu-aba " + (selectedAba == 0 ? "aba-selected" : "")}
+        >
+          <small>Reading: {mangaData.length}</small>
+        </div>
+        <div
+          onClick={() => handleChangeAba(1)}
+          className={"menu-aba " + (selectedAba == 1 ? "aba-selected" : "")}
+        >
+          <small>Waiting: {mangaWaitingData.length}</small>
+        </div>
 
-      <List mangaData={mangaData} setMangaData={setMangaData} />
-
-      <button onClick={() => downloadTxtFile()}>Download Backup</button>
+        <div
+          onClick={() => handleChangeAba(2)}
+          className={"menu-aba " + (selectedAba == 2 ? "aba-selected" : "")}
+        >
+          <small>Later: {mangaLaterData.length}</small>
+        </div>
+        <div
+          onClick={() => handleChangeAba(3)}
+          className={"menu-aba " + (selectedAba == 3 ? "aba-selected" : "")}
+        >
+          <small>Finished: {mangaFinishData.length}</small>
+        </div>
+      </div>
+      {selectedAba == 0 && (
+        <List mangaData={mangaData} setMangaData={setMangaData} />
+      )}
+      {selectedAba == 1 && (
+        <List mangaData={mangaWaitingData} setMangaData={setMangaWaitingData} />
+      )}
+      {selectedAba == 2 && (
+        <List mangaData={mangaLaterData} setMangaData={setMangaLaterData} />
+      )}
+      {selectedAba == 3 && (
+        <List mangaData={mangaFinishData} setMangaData={setMangaFinishData} />
+      )}
     </div>
   );
 }
