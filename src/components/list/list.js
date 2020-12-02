@@ -9,7 +9,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-function List({ mangaData, setMangaData }) {
+function List({ mangaData, setMangaData, switchManga }) {
   const [changeAbaId, setChangeAbaId] = useState(null);
   function handleChangeAba(id) {
     changeAbaId === id ? setChangeAbaId(null) : setChangeAbaId(id);
@@ -112,16 +112,68 @@ function List({ mangaData, setMangaData }) {
                         </div>
                       ) : (
                         <div className="changeAba">
-                          <a onClick={() => {}} className="op cantSelect">
+                          <a
+                            onClick={() => {
+                              const switched = switchManga(
+                                0,
+                                manga.id,
+                                setMangaData
+                              );
+                              if (switched) {
+                                console.log("aaa");
+                                handleRemove(manga.id);
+                              }
+                            }}
+                            className="op cantSelect"
+                          >
                             Reading
                           </a>
-                          <a onClick={() => {}} className="op cantSelect">
+                          <a
+                            onClick={() => {
+                              const switched = switchManga(
+                                1,
+                                manga.id,
+                                setMangaData
+                              );
+                              if (switched) {
+                                console.log("aaa");
+                                handleRemove(manga.id);
+                              }
+                            }}
+                            className="op cantSelect"
+                          >
                             Waiting
                           </a>
-                          <a onClick={() => {}} className="op cantSelect">
+                          <a
+                            onClick={() => {
+                              const switched = switchManga(
+                                2,
+                                manga.id,
+                                setMangaData
+                              );
+                              if (switched) {
+                                console.log("aaa");
+                                handleRemove(manga.id);
+                              }
+                            }}
+                            className="op cantSelect"
+                          >
                             Later
                           </a>
-                          <a onClick={() => {}} className="op cantSelect">
+                          <a
+                            onClick={() => {
+                              const switched = switchManga(
+                                3,
+                                manga.id,
+                                setMangaData
+                              );
+                              if (switched) {
+                                console.log("aaa");
+                                handleRemove(manga.id);
+                              }
+                            }}
+                            className="op cantSelect"
+                          >
                             Finished
                           </a>
                         </div>

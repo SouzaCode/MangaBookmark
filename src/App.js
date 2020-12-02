@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import "./App.css";
 import List from "./components/list/list";
-
+import { v4 as uuidv4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle, faDownload } from "@fortawesome/free-solid-svg-icons";
 
@@ -16,13 +16,36 @@ function App() {
   const [newName, setNewName] = useState("");
   const [newCap, setNewCap] = useState();
   const [selectedAba, setSelectedAba] = useState(0);
-
-  function getInitialData(dataName, mData, setFunc) {
-    console.log(mData);
+  const abasNames = [
+    "mangaData",
+    "mangaWaitingData",
+    "mangaLaterData",
+    "mangaFinishData",
+  ];
+  const googleFunctions = {
+    mangaData(obj) {
+      chrome.storage.sync.set({ mangaData: obj }, function () {});
+    },
+    mangaWaitingData(obj) {
+      chrome.storage.sync.set({ mangaWaitingData: obj }, function () {});
+    },
+    mangaLaterData(obj) {
+      chrome.storage.sync.set({ mangaLaterData: obj }, function () {});
+    },
+    mangaFinishData(obj) {
+      chrome.storage.sync.set(
+        { mangaFinishData: mangaFinishData },
+        function () {}
+      );
+    },
+  };
+  function getInitialData(dataName, setFunc) {
     chrome.storage.sync.get([dataName], function (r) {
       let data;
       if (r[dataName] === undefined) {
-        chrome.storage.sync.set(mData, function () {});
+        const gSync = googleFunctions[dataName];
+        //chrome.storage.sync.set(mData, function () {});
+        gSync([]);
         data = [];
       } else {
         data = r[dataName];
@@ -31,18 +54,10 @@ function App() {
     });
   }
   useEffect(() => {
-    getInitialData("mangaData", { mangaData: [] }, setMangaData);
-    getInitialData(
-      "mangaWaitingData",
-      { mangaWaitingData: [] },
-      setMangaWaitingData
-    );
-    getInitialData("mangaLaterData", { mangaLaterData: [] }, setMangaLaterData);
-    getInitialData(
-      "mangaFinishData",
-      { mangaFinishData: [] },
-      setMangaFinishData
-    );
+    getInitialData("mangaData", setMangaData);
+    getInitialData("mangaWaitingData", setMangaWaitingData);
+    getInitialData("mangaLaterData", setMangaLaterData);
+    getInitialData("mangaFinishData", setMangaFinishData);
   }, []);
   useEffect(() => {
     chrome.storage.sync.set({ mangaData: mangaData }, function () {});
@@ -65,40 +80,28 @@ function App() {
   function handleNew() {
     setIsCreatingNew(true);
   }
-  function submitNew(dataName, setFunc, saveObj) {
-    let mData = saveObj[dataName];
+  function submitNew(dataName, setFunc, mData) {
     let aux = {
-      id:
-        mData.reduce((max, num) => {
-          num.id > max ? (max = num.id) : (max = max);
-          return max;
-        }, 0) + 2,
+      id: uuidv4(),
       nome: newName ? newName : "NO NAME",
       cap: newCap != undefined ? newCap : 0,
     };
     let newAux = mData;
     newAux.push(aux);
     setFunc(newAux);
-    saveObj[dataName] = newAux;
-    chrome.storage.sync.set(saveObj, function () {});
+    const gSync = googleFunctions[dataName];
+    gSync(newAux);
     setIsCreatingNew(false);
   }
   function handleSubmitNew(e) {
     e.preventDefault();
-    if (selectedAba === 0)
-      submitNew("mangaData", setMangaData, { mangaData: mangaData });
+    if (selectedAba === 0) submitNew("mangaData", setMangaData, mangaData);
     if (selectedAba === 1)
-      submitNew("mangaWaitingData", setMangaWaitingData, {
-        mangaWaitingData: mangaWaitingData,
-      });
+      submitNew("mangaWaitingData", setMangaWaitingData, mangaWaitingData);
     if (selectedAba === 2)
-      submitNew("mangaLaterData", setMangaLaterData, {
-        mangaLaterData: mangaLaterData,
-      });
+      submitNew("mangaLaterData", setMangaLaterData, mangaLaterData);
     if (selectedAba === 3)
-      submitNew("mangaFinishData", setMangaFinishData, {
-        mangaFinishData: mangaFinishData,
-      });
+      submitNew("mangaFinishData", setMangaFinishData, mangaFinishData);
   }
 
   function downloadTxtFile() {
@@ -113,6 +116,23 @@ function App() {
   }
   function handleChangeAba(id) {
     setSelectedAba(id);
+  }
+  function switchMangas(abaDestination, mangaId, setFunc) {
+    const mangaStruct = [
+      mangaData,
+      mangaWaitingData,
+      mangaLaterData,
+      mangaFinishData,
+    ];
+    if (abaDestination != selectedAba) {
+      let data = mangaStruct[selectedAba].filter((mD) => mD.id == mangaId);
+      mangaStruct[abaDestination].push(data[0]);
+      setFunc(mangaStruct[abaDestination]);
+      const gSync = googleFunctions[abasNames[abaDestination]];
+      gSync(mangaStruct[abaDestination]);
+      return true;
+    }
+    return false;
   }
 
   return (
@@ -186,16 +206,32 @@ function App() {
         </div>
       </div>
       {selectedAba === 0 && (
-        <List mangaData={mangaData} setMangaData={setMangaData} />
+        <List
+          mangaData={mangaData}
+          setMangaData={setMangaData}
+          switchManga={switchMangas}
+        />
       )}
       {selectedAba === 1 && (
-        <List mangaData={mangaWaitingData} setMangaData={setMangaWaitingData} />
+        <List
+          mangaData={mangaWaitingData}
+          setMangaData={setMangaWaitingData}
+          switchManga={switchMangas}
+        />
       )}
       {selectedAba === 2 && (
-        <List mangaData={mangaLaterData} setMangaData={setMangaLaterData} />
+        <List
+          mangaData={mangaLaterData}
+          setMangaData={setMangaLaterData}
+          switchManga={switchMangas}
+        />
       )}
       {selectedAba === 3 && (
-        <List mangaData={mangaFinishData} setMangaData={setMangaFinishData} />
+        <List
+          mangaData={mangaFinishData}
+          setMangaData={setMangaFinishData}
+          switchManga={switchMangas}
+        />
       )}
     </div>
   );
