@@ -85,17 +85,17 @@ function App() {
   }
   function handleSubmitNew(e) {
     e.preventDefault();
-    if (selectedAba == 0)
+    if (selectedAba === 0)
       submitNew("mangaData", setMangaData, { mangaData: mangaData });
-    if (selectedAba == 1)
+    if (selectedAba === 1)
       submitNew("mangaWaitingData", setMangaWaitingData, {
         mangaWaitingData: mangaWaitingData,
       });
-    if (selectedAba == 2)
+    if (selectedAba === 2)
       submitNew("mangaLaterData", setMangaLaterData, {
         mangaLaterData: mangaLaterData,
       });
-    if (selectedAba == 3)
+    if (selectedAba === 3)
       submitNew("mangaFinishData", setMangaFinishData, {
         mangaFinishData: mangaFinishData,
       });
@@ -118,7 +118,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <small className="app-title">Meus Bookmarks</small>
+        <small className="app-title">My Bookmarks</small>
         {!isCreatingNew ? (
           <>
             <a className="bckp-btn" onClick={() => downloadTxtFile()}>
@@ -161,40 +161,40 @@ function App() {
       <div className="menu cantSelect">
         <div
           onClick={() => handleChangeAba(0)}
-          className={"menu-aba " + (selectedAba == 0 ? "aba-selected" : "")}
+          className={"menu-aba " + (selectedAba === 0 ? "aba-selected" : "")}
         >
           <small>Reading: {mangaData.length}</small>
         </div>
         <div
           onClick={() => handleChangeAba(1)}
-          className={"menu-aba " + (selectedAba == 1 ? "aba-selected" : "")}
+          className={"menu-aba " + (selectedAba === 1 ? "aba-selected" : "")}
         >
           <small>Waiting: {mangaWaitingData.length}</small>
         </div>
 
         <div
           onClick={() => handleChangeAba(2)}
-          className={"menu-aba " + (selectedAba == 2 ? "aba-selected" : "")}
+          className={"menu-aba " + (selectedAba === 2 ? "aba-selected" : "")}
         >
           <small>Later: {mangaLaterData.length}</small>
         </div>
         <div
           onClick={() => handleChangeAba(3)}
-          className={"menu-aba " + (selectedAba == 3 ? "aba-selected" : "")}
+          className={"menu-aba " + (selectedAba === 3 ? "aba-selected" : "")}
         >
           <small>Finished: {mangaFinishData.length}</small>
         </div>
       </div>
-      {selectedAba == 0 && (
+      {selectedAba === 0 && (
         <List mangaData={mangaData} setMangaData={setMangaData} />
       )}
-      {selectedAba == 1 && (
+      {selectedAba === 1 && (
         <List mangaData={mangaWaitingData} setMangaData={setMangaWaitingData} />
       )}
-      {selectedAba == 2 && (
+      {selectedAba === 2 && (
         <List mangaData={mangaLaterData} setMangaData={setMangaLaterData} />
       )}
-      {selectedAba == 3 && (
+      {selectedAba === 3 && (
         <List mangaData={mangaFinishData} setMangaData={setMangaFinishData} />
       )}
     </div>
