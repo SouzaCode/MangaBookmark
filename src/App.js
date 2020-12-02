@@ -39,6 +39,26 @@ function App() {
       );
     },
   };
+  const allMangasData = {
+    mangaData: mangaData,
+    mangaWaitingData: mangaWaitingData,
+    mangaLaterData: mangaLaterData,
+    mangaFinishData: mangaFinishData,
+  };
+  const allMangasSet = {
+    mangaData(obj) {
+      setMangaData(obj);
+    },
+    mangaWaitingData(obj) {
+      setMangaWaitingData(obj);
+    },
+    mangaLaterData(obj) {
+      setMangaLaterData(obj);
+    },
+    mangaFinishData(obj) {
+      setMangaFinishData(obj);
+    },
+  };
   function getInitialData(dataName, setFunc) {
     chrome.storage.sync.get([dataName], function (r) {
       let data;
@@ -80,45 +100,28 @@ function App() {
   function handleNew() {
     setIsCreatingNew(true);
   }
-  function submitNew(dataName, setFunc, mData) {
+
+  function handleSubmitNew(e) {
+    e.preventDefault();
+    const setFunc = allMangasSet[abasNames[selectedAba]];
     let aux = {
       id: uuidv4(),
       nome: newName ? newName : "NO NAME",
       cap: newCap != undefined ? newCap : 0,
     };
-    let newAux = mData;
+    let newAux = allMangasData[abasNames[selectedAba]];
     newAux.push(aux);
     setFunc(newAux);
-    const gSync = googleFunctions[dataName];
+    const gSync = googleFunctions[abasNames[selectedAba]];
     gSync(newAux);
     setIsCreatingNew(false);
-  }
-  function handleSubmitNew(e) {
-    e.preventDefault();
-    if (selectedAba === 0) submitNew("mangaData", setMangaData, mangaData);
-    if (selectedAba === 1)
-      submitNew("mangaWaitingData", setMangaWaitingData, mangaWaitingData);
-    if (selectedAba === 2)
-      submitNew("mangaLaterData", setMangaLaterData, mangaLaterData);
-    if (selectedAba === 3)
-      submitNew("mangaFinishData", setMangaFinishData, mangaFinishData);
   }
 
   function downloadTxtFile() {
     const element = document.createElement("a");
-    const file = new Blob(
-      [
-        JSON.stringify({
-          mangaData: mangaData,
-          mangaWaitingData: mangaWaitingData,
-          mangaLaterData: mangaLaterData,
-          mangaFinishData: mangaFinishData,
-        }),
-      ],
-      {
-        type: "text/json",
-      }
-    );
+    const file = new Blob([JSON.stringify(allMangasData)], {
+      type: "text/json",
+    });
     element.href = URL.createObjectURL(file);
     element.download = "backup.json";
     document.body.appendChild(element); // Required for this to work in FireFox
@@ -215,34 +218,12 @@ function App() {
           <small>Finished: {mangaFinishData.length}</small>
         </div>
       </div>
-      {selectedAba === 0 && (
-        <List
-          mangaData={mangaData}
-          setMangaData={setMangaData}
-          switchManga={switchMangas}
-        />
-      )}
-      {selectedAba === 1 && (
-        <List
-          mangaData={mangaWaitingData}
-          setMangaData={setMangaWaitingData}
-          switchManga={switchMangas}
-        />
-      )}
-      {selectedAba === 2 && (
-        <List
-          mangaData={mangaLaterData}
-          setMangaData={setMangaLaterData}
-          switchManga={switchMangas}
-        />
-      )}
-      {selectedAba === 3 && (
-        <List
-          mangaData={mangaFinishData}
-          setMangaData={setMangaFinishData}
-          switchManga={switchMangas}
-        />
-      )}
+      <List
+        mangaData={allMangasData[abasNames[selectedAba]]}
+        setMangaData={allMangasSet[abasNames[selectedAba]]}
+        switchManga={switchMangas}
+        gSync={googleFunctions[abasNames[selectedAba]]}
+      />
     </div>
   );
 }
