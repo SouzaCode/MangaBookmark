@@ -106,9 +106,19 @@ function App() {
 
   function downloadTxtFile() {
     const element = document.createElement("a");
-    const file = new Blob([JSON.stringify(mangaData)], {
-      type: "text/json",
-    });
+    const file = new Blob(
+      [
+        JSON.stringify({
+          mangaData: mangaData,
+          mangaWaitingData: mangaWaitingData,
+          mangaLaterData: mangaLaterData,
+          mangaFinishData: mangaFinishData,
+        }),
+      ],
+      {
+        type: "text/json",
+      }
+    );
     element.href = URL.createObjectURL(file);
     element.download = "backup.json";
     document.body.appendChild(element); // Required for this to work in FireFox
