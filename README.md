@@ -19,7 +19,7 @@ Download the most reacent version at realeases and install it.
 - Go to the extension manager tab at chrome an let the dev option active
 - "load unpacked" the build folder and be happy
 
-## Intall from cloning
+## Install from cloning
 
 - $ npm i
 - $ npm run build
