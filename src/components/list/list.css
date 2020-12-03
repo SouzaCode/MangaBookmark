@@ -36,11 +36,14 @@ p.name {
   position: relative;
   top: 1px;
 }
+.funcs {
+  display: flex;
+  flex-direction: row;
+}
 .op {
   box-shadow: inset 0 1px 0 0 #fff;
   background: linear-gradient(180deg, #f9f9f9 5%, #e9e9e9);
   background-color: #f9f9f9;
-  /* border-radius: 6px; */
   border: 1px solid #dcdcdc;
   display: inline-block;
   cursor: pointer;
@@ -55,7 +58,7 @@ p.name {
 
 .add:hover {
   background: linear-gradient(to bottom, #f9f9f9 15%, #34cb79 100%);
-  background-color: 959595;
+  background-color: #959595;
 }
 .sub:hover {
   background: linear-gradient(to bottom, #f9f9f9 15%, #959595 100%);
@@ -64,4 +67,17 @@ p.name {
 .op:active {
   position: relative;
   top: 1px;
+}
+
+.abaSwitch {
+  padding-left: 4px;
+  padding-right: 4px;
+  border: 1px solid #2e466e;
+  color: white;
+  box-shadow: inset 0 1px 0 0 #2e466e;
+  background: linear-gradient(180deg, #2e466e 5%, #415989);
+  background-color: #2e466e;
+}
+.changeAba {
+  min-width: 213px;
 }

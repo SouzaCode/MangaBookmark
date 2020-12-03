@@ -2,57 +2,124 @@ import React, { useEffect, useState } from "react";
 
 import "./App.css";
 import List from "./components/list/list";
-
+import { v4 as uuidv4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle, faDownload } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [isCreatingNew, setIsCreatingNew] = useState(false);
   const [mangaData, setMangaData] = useState([]);
+  const [mangaWaitingData, setMangaWaitingData] = useState([]);
+  const [mangaLaterData, setMangaLaterData] = useState([]);
+  const [mangaFinishData, setMangaFinishData] = useState([]);
+
   const [newName, setNewName] = useState("");
   const [newCap, setNewCap] = useState();
-  useEffect(() => {
-    chrome.storage.sync.get(["mangaData"], function (r) {
+  const [selectedAba, setSelectedAba] = useState(0);
+  const abasNames = [
+    "mangaData",
+    "mangaWaitingData",
+    "mangaLaterData",
+    "mangaFinishData",
+  ];
+  const googleFunctions = {
+    mangaData(obj) {
+      chrome.storage.sync.set({ mangaData: obj }, function () {});
+    },
+    mangaWaitingData(obj) {
+      chrome.storage.sync.set({ mangaWaitingData: obj }, function () {});
+    },
+    mangaLaterData(obj) {
+      chrome.storage.sync.set({ mangaLaterData: obj }, function () {});
+    },
+    mangaFinishData(obj) {
+      chrome.storage.sync.set(
+        { mangaFinishData: mangaFinishData },
+        function () {}
+      );
+    },
+  };
+  const allMangasData = {
+    mangaData: mangaData,
+    mangaWaitingData: mangaWaitingData,
+    mangaLaterData: mangaLaterData,
+    mangaFinishData: mangaFinishData,
+  };
+  const allMangasSet = {
+    mangaData(obj) {
+      setMangaData(obj);
+    },
+    mangaWaitingData(obj) {
+      setMangaWaitingData(obj);
+    },
+    mangaLaterData(obj) {
+      setMangaLaterData(obj);
+    },
+    mangaFinishData(obj) {
+      setMangaFinishData(obj);
+    },
+  };
+  function getInitialData(dataName, setFunc) {
+    chrome.storage.sync.get([dataName], function (r) {
       let data;
-      if (r.mangaData === undefined) {
-        chrome.storage.sync.set({ mangaData: [] }, function () {});
+      if (r[dataName] === undefined) {
+        const gSync = googleFunctions[dataName];
+        //chrome.storage.sync.set(mData, function () {});
+        gSync([]);
         data = [];
       } else {
-        console.log(r.mangaData);
-        data = r.mangaData;
+        data = r[dataName];
       }
-      setMangaData(data);
+      setFunc(data);
     });
+  }
+  useEffect(() => {
+    getInitialData("mangaData", setMangaData);
+    getInitialData("mangaWaitingData", setMangaWaitingData);
+    getInitialData("mangaLaterData", setMangaLaterData);
+    getInitialData("mangaFinishData", setMangaFinishData);
   }, []);
   useEffect(() => {
-    console.log(mangaData);
     chrome.storage.sync.set({ mangaData: mangaData }, function () {});
   }, [mangaData]);
+  useEffect(() => {
+    chrome.storage.sync.set(
+      { mangaWaitingData: mangaWaitingData },
+      function () {}
+    );
+  }, [mangaWaitingData]);
+  useEffect(() => {
+    chrome.storage.sync.set({ mangaLaterData: mangaLaterData }, function () {});
+  }, [mangaLaterData]);
+  useEffect(() => {
+    chrome.storage.sync.set(
+      { mangaFinishData: mangaFinishData },
+      function () {}
+    );
+  }, [mangaFinishData]);
   function handleNew() {
     setIsCreatingNew(true);
   }
+
   function handleSubmitNew(e) {
     e.preventDefault();
-
+    const setFunc = allMangasSet[abasNames[selectedAba]];
     let aux = {
-      id:
-        mangaData.reduce((max, num) => {
-          num.id > max ? (max = num.id) : (max = max);
-          return max;
-        }, 0) + 2,
+      id: uuidv4(),
       nome: newName ? newName : "NO NAME",
       cap: newCap != undefined ? newCap : 0,
     };
-    let newAux = mangaData;
+    let newAux = allMangasData[abasNames[selectedAba]];
     newAux.push(aux);
-    setMangaData(newAux);
-    chrome.storage.sync.set({ mangaData: newAux }, function () {});
+    setFunc(newAux);
+    const gSync = googleFunctions[abasNames[selectedAba]];
+    gSync(newAux);
     setIsCreatingNew(false);
   }
 
   function downloadTxtFile() {
     const element = document.createElement("a");
-    const file = new Blob([JSON.stringify(mangaData)], {
+    const file = new Blob([JSON.stringify(allMangasData)], {
       type: "text/json",
     });
     element.href = URL.createObjectURL(file);
@@ -60,17 +127,42 @@ function App() {
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   }
+  function handleChangeAba(id) {
+    setSelectedAba(id);
+  }
+  function switchMangas(abaDestination, mangaId, setFunc) {
+    const mangaStruct = [
+      mangaData,
+      mangaWaitingData,
+      mangaLaterData,
+      mangaFinishData,
+    ];
+    if (abaDestination != selectedAba) {
+      let data = mangaStruct[selectedAba].filter((mD) => mD.id == mangaId);
+      mangaStruct[abaDestination].push(data[0]);
+      setFunc(mangaStruct[abaDestination]);
+      const gSync = googleFunctions[abasNames[abaDestination]];
+      gSync(mangaStruct[abaDestination]);
+      return true;
+    }
+    return false;
+  }
 
   return (
     <div className="App">
       <header className="App-header">
-        <small className="app-title">Meus Bookmarks</small>
+        <small className="app-title">My Bookmarks</small>
         {!isCreatingNew ? (
-          <div className="createN">
-            <a onClick={handleNew} className="text-new">
-              <FontAwesomeIcon icon={faPlusCircle} /> Novo
+          <>
+            <a className="bckp-btn" onClick={() => downloadTxtFile()}>
+              <FontAwesomeIcon icon={faDownload} /> Backup
             </a>
-          </div>
+            <div className="createN">
+              <a onClick={handleNew} className="text-new">
+                <FontAwesomeIcon icon={faPlusCircle} /> New
+              </a>
+            </div>
+          </>
         ) : (
           <form onSubmit={handleSubmitNew}>
             <div className="creatingNew">
@@ -99,10 +191,39 @@ function App() {
           </form>
         )}
       </header>
+      <div className="menu cantSelect">
+        <div
+          onClick={() => handleChangeAba(0)}
+          className={"menu-aba " + (selectedAba === 0 ? "aba-selected" : "")}
+        >
+          <small>Reading: {mangaData.length}</small>
+        </div>
+        <div
+          onClick={() => handleChangeAba(1)}
+          className={"menu-aba " + (selectedAba === 1 ? "aba-selected" : "")}
+        >
+          <small>Waiting: {mangaWaitingData.length}</small>
+        </div>
 
-      <List mangaData={mangaData} setMangaData={setMangaData} />
-
-      <button onClick={() => downloadTxtFile()}>Download Backup</button>
+        <div
+          onClick={() => handleChangeAba(2)}
+          className={"menu-aba " + (selectedAba === 2 ? "aba-selected" : "")}
+        >
+          <small>Later: {mangaLaterData.length}</small>
+        </div>
+        <div
+          onClick={() => handleChangeAba(3)}
+          className={"menu-aba " + (selectedAba === 3 ? "aba-selected" : "")}
+        >
+          <small>Finished: {mangaFinishData.length}</small>
+        </div>
+      </div>
+      <List
+        mangaData={allMangasData[abasNames[selectedAba]]}
+        setMangaData={allMangasSet[abasNames[selectedAba]]}
+        switchManga={switchMangas}
+        gSync={googleFunctions[abasNames[selectedAba]]}
+      />
     </div>
   );
 }

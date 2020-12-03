@@ -3,9 +3,17 @@ import "./list.css";
 
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrashAlt,
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
-function List({ mangaData, setMangaData }) {
+function List({ mangaData, setMangaData, switchManga, gSync }) {
+  const [changeAbaId, setChangeAbaId] = useState(null);
+  function handleChangeAba(id) {
+    changeAbaId === id ? setChangeAbaId(null) : setChangeAbaId(id);
+  }
   function handleAdd(id) {
     setMangaData(
       mangaData.map((manga) => {
@@ -39,7 +47,7 @@ function List({ mangaData, setMangaData }) {
     let list = mangaData;
     list.splice(dest, 0, list.splice(src, 1)[0]);
     setMangaData(list);
-    chrome.storage.sync.set({ mangaData: mangaData }, function () {});
+    gSync(mangaData);
   }
   return (
     <DragDropContext
@@ -84,19 +92,104 @@ function List({ mangaData, setMangaData }) {
                       </a>
                       {manga.nome}
                     </p>
-                    <div className="cap">
-                      <small className="ncap">Cap. {manga.cap}</small>
+
+                    <div className="funcs">
+                      {changeAbaId != manga.id ? (
+                        <div className="cap">
+                          <small className="ncap">Cap. {manga.cap}</small>
+                          <a
+                            onClick={() => handleAdd(manga.id)}
+                            className="op add cantSelect"
+                          >
+                            +
+                          </a>
+                          <a
+                            onClick={() => handleSub(manga.id)}
+                            className="op sub cantSelect"
+                          >
+                            -
+                          </a>
+                        </div>
+                      ) : (
+                        <div className="changeAba">
+                          <a
+                            onClick={() => {
+                              const switched = switchManga(
+                                0,
+                                manga.id,
+                                setMangaData
+                              );
+                              if (switched) {
+                                console.log("aaa");
+                                handleRemove(manga.id);
+                              }
+                            }}
+                            className="op cantSelect"
+                          >
+                            Reading
+                          </a>
+                          <a
+                            onClick={() => {
+                              const switched = switchManga(
+                                1,
+                                manga.id,
+                                setMangaData
+                              );
+                              if (switched) {
+                                console.log("aaa");
+                                handleRemove(manga.id);
+                              }
+                            }}
+                            className="op cantSelect"
+                          >
+                            Waiting
+                          </a>
+                          <a
+                            onClick={() => {
+                              const switched = switchManga(
+                                2,
+                                manga.id,
+                                setMangaData
+                              );
+                              if (switched) {
+                                console.log("aaa");
+                                handleRemove(manga.id);
+                              }
+                            }}
+                            className="op cantSelect"
+                          >
+                            Later
+                          </a>
+                          <a
+                            onClick={() => {
+                              const switched = switchManga(
+                                3,
+                                manga.id,
+                                setMangaData
+                              );
+                              if (switched) {
+                                console.log("aaa");
+                                handleRemove(manga.id);
+                              }
+                            }}
+                            className="op cantSelect"
+                          >
+                            Finished
+                          </a>
+                        </div>
+                      )}
+
                       <a
-                        onClick={() => handleAdd(manga.id)}
-                        className="op add cantSelect"
+                        onClick={() => handleChangeAba(manga.id)}
+                        className="op abaSwitch cantSelect"
                       >
-                        +
-                      </a>
-                      <a
-                        onClick={() => handleSub(manga.id)}
-                        className="op sub cantSelect"
-                      >
-                        -
+                        <FontAwesomeIcon
+                          icon={
+                            changeAbaId != manga.id
+                              ? faChevronLeft
+                              : faChevronRight
+                          }
+                        />
                       </a>
                     </div>
                   </div>

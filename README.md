@@ -9,7 +9,7 @@ Only and exclusively because I am frustrated by being unable to remember the nam
 # How to get it?
 
 You can use the chrome store link below, or, if yopu want faster updates, you can clone this git or get it from releases
-https://chrome.google.com/webstore/detail/manga-bookmark/hclahhnkdechgledjlbjnldiakecdedg?utm_source=chrome-ntp-icon
+https://chrome.google.com/webstore/detail/manga-bookmark/hclahhnkdechgledjlbjnldiakecdedg
 
 Download the most reacent version at realeases and install it.
 
@@ -19,7 +19,7 @@ Download the most reacent version at realeases and install it.
 - Go to the extension manager tab at chrome an let the dev option active
 - "load unpacked" the build folder and be happy
 
-## Intall from cloning
+## Install from cloning
 
 - $ npm i
 - $ npm run build
@@ -34,7 +34,7 @@ It saves the information of your manga list at your google sync storage, so if y
 
        (I'll try to let it prettier in the future, feel free to suggest a new design 🥰)
 
-![alt text](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p2.png) &nbsp;&nbsp; &nbsp;&nbsp; ![alt text](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p4.png)
+![alt text](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/developAbas/doc_assets/v1.0/p4.png) &nbsp;&nbsp; &nbsp;&nbsp; ![alt text](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/developAbas/doc_assets/v1.0/p6.png)
 
 # Want to donate and help the development?
 
@@ -57,7 +57,6 @@ Dogecoin: D7t9nvfjj73M7kgxMNr35cD9XzCA6cbYsy
 Ethereum: 0x1fcb76c03a319bac659f64bb1f8199f0be3d233a
 
 Ripple: rnW8je5SsuFjkMSWkgfXvqZH3gLTpXxfFH
-
 
 # Follow me on my YouTube Channel
 
