@@ -2,7 +2,7 @@
   "short_name": "MangaB",
   "name": "Manga Bookmark",
   "manifest_version": 2,
-  "version": "0.9.10",
+  "version": "1.0.0",
   "browser_action": {
     "default_popup": "index.html",
     "default_title": "Manga Bookmark",
