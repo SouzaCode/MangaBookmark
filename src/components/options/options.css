@@ -1,0 +1,63 @@
+.opt-container {
+  margin-left: 16px;
+  margin-right: 16px;
+  display: flex;
+  flex-direction: column;
+}
+.bckp-btn {
+  font-size: 12pt;
+  max-height: -webkit-fit-content;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+  background: linear-gradient(180deg, #e2c417 5%, #dbc336);
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+  color: #fff;
+  padding: 2px 8px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #e2c417;
+}
+.bckp-btn:hover {
+  background: linear-gradient(to bottom, #dbc336 5%, #e2c417 100%);
+  background-color: #dbc336;
+}
+.bckp-btn:active {
+  position: relative;
+  top: 1px;
+}
+
+.up-bckp-btn {
+  font-size: 12pt;
+  max-height: -webkit-fit-content;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+  background: linear-gradient(180deg, #e29117 5%, #c79e2d);
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+  color: #fff;
+  padding: 2px 8px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #e29117;
+}
+.up-bckp-btn:hover {
+  background: linear-gradient(to bottom, #c79e2d 5%, #e29117 100%);
+  background-color: #c79e2d;
+}
+.up-bckp-btn:active {
+  position: relative;
+  top: 1px;
+}
+
+.backupMenu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.opt-title {
+  font-size: 14pt;
+  color: bisque;
+  margin: 14px 16px 8px 0px;
+}

@@ -78,25 +78,25 @@
   top: 1px;
 }
 
-.bckp-btn {
+.config-btn {
   font-size: 12pt;
   max-height: -webkit-fit-content;
   max-height: -moz-fit-content;
   max-height: fit-content;
-  background: linear-gradient(180deg, #e2c417 5%, #dbc336);
+  background: linear-gradient(180deg, #29303c 5%, #374154);
   border-radius: 3px;
   display: inline-block;
   cursor: pointer;
   color: #fff;
   padding: 2px 8px;
   text-decoration: none;
-  text-shadow: 0 1px 0 #e2c417;
+  text-shadow: 0 1px 0 #29303c;
 }
-.bckp-btn:hover {
-  background: linear-gradient(to bottom, #dbc336 5%, #e2c417 100%);
-  background-color: #dbc336;
+.config-btn:hover {
+  background: linear-gradient(to bottom, #374154 5%, #29303c 100%);
+  background-color: #374154;
 }
-.bckp-btn:active {
+.config-btn:active {
   position: relative;
   top: 1px;
 }

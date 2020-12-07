@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import "./App.css";
 import List from "./components/list/list";
+import Options from "./components/options/options";
 import { v4 as uuidv4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle, faDownload } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlusCircle,
+  faCog,
+  faChevronLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [isCreatingNew, setIsCreatingNew] = useState(false);
@@ -12,7 +17,7 @@ function App() {
   const [mangaWaitingData, setMangaWaitingData] = useState([]);
   const [mangaLaterData, setMangaLaterData] = useState([]);
   const [mangaFinishData, setMangaFinishData] = useState([]);
-
+  const [inOptions, setInOptions] = useState(false);
   const [newName, setNewName] = useState("");
   const [newCap, setNewCap] = useState();
   const [selectedAba, setSelectedAba] = useState(0);
@@ -98,6 +103,7 @@ function App() {
     );
   }, [mangaFinishData]);
   function handleNew() {
+    setInOptions(false);
     setIsCreatingNew(true);
   }
 
@@ -117,16 +123,6 @@ function App() {
     setIsCreatingNew(false);
   }
 
-  function downloadTxtFile() {
-    const element = document.createElement("a");
-    const file = new Blob([JSON.stringify(allMangasData)], {
-      type: "text/json",
-    });
-    element.href = URL.createObjectURL(file);
-    element.download = "backup.json";
-    document.body.appendChild(element); // Required for this to work in FireFox
-    element.click();
-  }
   function handleChangeAba(id) {
     setSelectedAba(id);
   }
@@ -147,6 +143,9 @@ function App() {
     }
     return false;
   }
+  function handleOptions() {
+    inOptions ? setInOptions(false) : setInOptions(true);
+  }
 
   return (
     <div className="App">
@@ -154,13 +153,20 @@ function App() {
         <small className="app-title">My Bookmarks</small>
         {!isCreatingNew ? (
           <>
-            <a className="bckp-btn" onClick={() => downloadTxtFile()}>
-              <FontAwesomeIcon icon={faDownload} /> Backup
-            </a>
             <div className="createN">
               <a onClick={handleNew} className="text-new">
                 <FontAwesomeIcon icon={faPlusCircle} /> New
               </a>
+              {!inOptions ? (
+                <a className="config-btn" onClick={() => handleOptions()}>
+                  <FontAwesomeIcon icon={faCog} /> Options
+                </a>
+              ) : (
+                <a className="config-btn" onClick={() => handleOptions()}>
+                  List&nbsp;
+                  <FontAwesomeIcon icon={faChevronLeft} color={"green"} />
+                </a>
+              )}
             </div>
           </>
         ) : (
@@ -191,39 +197,60 @@ function App() {
           </form>
         )}
       </header>
-      <div className="menu cantSelect">
-        <div
-          onClick={() => handleChangeAba(0)}
-          className={"menu-aba " + (selectedAba === 0 ? "aba-selected" : "")}
-        >
-          <small>Reading: {mangaData.length}</small>
-        </div>
-        <div
-          onClick={() => handleChangeAba(1)}
-          className={"menu-aba " + (selectedAba === 1 ? "aba-selected" : "")}
-        >
-          <small>Waiting: {mangaWaitingData.length}</small>
-        </div>
+      {!inOptions ? (
+        <>
+          <div className="menu cantSelect">
+            <div
+              onClick={() => handleChangeAba(0)}
+              className={
+                "menu-aba " + (selectedAba === 0 ? "aba-selected" : "")
+              }
+            >
+              <small>Reading: {mangaData.length}</small>
+            </div>
+            <div
+              onClick={() => handleChangeAba(1)}
+              className={
+                "menu-aba " + (selectedAba === 1 ? "aba-selected" : "")
+              }
+            >
+              <small>Waiting: {mangaWaitingData.length}</small>
+            </div>
 
-        <div
-          onClick={() => handleChangeAba(2)}
-          className={"menu-aba " + (selectedAba === 2 ? "aba-selected" : "")}
-        >
-          <small>Later: {mangaLaterData.length}</small>
-        </div>
-        <div
-          onClick={() => handleChangeAba(3)}
-          className={"menu-aba " + (selectedAba === 3 ? "aba-selected" : "")}
-        >
-          <small>Finished: {mangaFinishData.length}</small>
-        </div>
-      </div>
-      <List
-        mangaData={allMangasData[abasNames[selectedAba]]}
-        setMangaData={allMangasSet[abasNames[selectedAba]]}
-        switchManga={switchMangas}
-        gSync={googleFunctions[abasNames[selectedAba]]}
-      />
+            <div
+              onClick={() => handleChangeAba(2)}
+              className={
+                "menu-aba " + (selectedAba === 2 ? "aba-selected" : "")
+              }
+            >
+              <small>Later: {mangaLaterData.length}</small>
+            </div>
+            <div
+              onClick={() => handleChangeAba(3)}
+              className={
+                "menu-aba " + (selectedAba === 3 ? "aba-selected" : "")
+              }
+            >
+              <small>Finished: {mangaFinishData.length}</small>
+            </div>
+          </div>
+
+          <List
+            mangaData={allMangasData[abasNames[selectedAba]]}
+            setMangaData={allMangasSet[abasNames[selectedAba]]}
+            switchManga={switchMangas}
+            gSync={googleFunctions[abasNames[selectedAba]]}
+          />
+        </>
+      ) : (
+        <Options
+          allMangasSet={allMangasSet}
+          allMangasData={allMangasData}
+          googleFunctions={googleFunctions}
+          abasNames={abasNames}
+          setInOptions={setInOptions}
+        />
+      )}
     </div>
   );
 }
