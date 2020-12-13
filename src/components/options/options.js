@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./options.css";
 
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlusCircle,
-  faDownload,
-  faFileUpload,
-} from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faFileUpload } from "@fortawesome/free-solid-svg-icons";
 
 function Options({
   allMangasSet,

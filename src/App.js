@@ -113,7 +113,7 @@ function App() {
     let aux = {
       id: uuidv4(),
       nome: newName ? newName : "NO NAME",
-      cap: newCap != undefined ? newCap : 0,
+      cap: newCap !== undefined ? newCap : 0,
     };
     let newAux = allMangasData[abasNames[selectedAba]];
     newAux.push(aux);
@@ -133,8 +133,8 @@ function App() {
       mangaLaterData,
       mangaFinishData,
     ];
-    if (abaDestination != selectedAba) {
-      let data = mangaStruct[selectedAba].filter((mD) => mD.id == mangaId);
+    if (abaDestination !== selectedAba) {
+      let data = mangaStruct[selectedAba].filter((mD) => mD.id === mangaId);
       mangaStruct[abaDestination].push(data[0]);
       setFunc(mangaStruct[abaDestination]);
       const gSync = googleFunctions[abasNames[abaDestination]];

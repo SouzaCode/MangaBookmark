@@ -7,12 +7,21 @@ import {
   faTrashAlt,
   faChevronLeft,
   faChevronRight,
+  faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 
 function List({ mangaData, setMangaData, switchManga, gSync }) {
   const [changeAbaId, setChangeAbaId] = useState(null);
+  const [editingMangaId, setEditingMangaId] = useState(null);
   function handleChangeAba(id) {
     changeAbaId === id ? setChangeAbaId(null) : setChangeAbaId(id);
+  }
+  async function switchMangaAba(aba, id) {
+    const switched = await switchManga(aba, id, setMangaData);
+    if (switched) {
+      handleRemove(id);
+      handleChangeAba(id);
+    }
   }
   function handleAdd(id) {
     setMangaData(
@@ -49,6 +58,19 @@ function List({ mangaData, setMangaData, switchManga, gSync }) {
     setMangaData(list);
     gSync(mangaData);
   }
+  function handleStartEdit(id) {
+    editingMangaId !== id ? setEditingMangaId(id) : setEditingMangaId(null);
+  }
+  function handleEdit(newName) {
+    let newData = mangaData;
+    newData = newData.map((mg) => {
+      if (mg.id === editingMangaId) {
+        mg.nome = newName;
+      }
+      return mg;
+    });
+    setMangaData(newData);
+  }
   return (
     <DragDropContext
       onDragEnd={(param) => {
@@ -70,7 +92,7 @@ function List({ mangaData, setMangaData, switchManga, gSync }) {
               >
                 {(provided, snapshot) => (
                   <div
-                    className="item"
+                    className={changeAbaId !== manga.id ? "item" : "item-hide"}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     style={{
@@ -83,20 +105,60 @@ function List({ mangaData, setMangaData, switchManga, gSync }) {
                         : "none",
                     }}
                   >
-                    <p className="name" {...provided.dragHandleProps}>
+                    <p
+                      className={
+                        editingMangaId === manga.id ? "editing-name" : "name"
+                      }
+                      {...provided.dragHandleProps}
+                    >
                       <a
                         className="remove"
                         onClick={() => handleRemove(manga.id)}
                       >
                         <FontAwesomeIcon icon={faTrashAlt} />
                       </a>
-                      {manga.nome}
+                      {editingMangaId === manga.id &&
+                      changeAbaId !== manga.id ? (
+                        <div className="edit">
+                          <input
+                            {...provided.dragHandleProps}
+                            type="text"
+                            onChange={(e) => handleEdit(e.target.value)}
+                            name="manga"
+                            value={manga.nome}
+                            className="editBox"
+                          ></input>
+                          <a
+                            className="op"
+                            onClick={() => handleStartEdit(manga.id)}
+                          >
+                            OK
+                          </a>
+                        </div>
+                      ) : (
+                        <>
+                          {manga.nome}{" "}
+                          <a
+                            className={
+                              changeAbaId !== manga.id
+                                ? "show-hover edit"
+                                : "edit"
+                            }
+                            onClick={() => handleStartEdit(manga.id)}
+                          >
+                            <FontAwesomeIcon icon={faEdit} />
+                          </a>
+                        </>
+                      )}
                     </p>
 
                     <div className="funcs">
                       {changeAbaId != manga.id ? (
                         <div className="cap">
-                          <small className="ncap">Cap. {manga.cap}</small>
+                          {editingMangaId !== manga.id && (
+                            <small className="ncap">Cap. {manga.cap}</small>
+                          )}
+
                           <a
                             onClick={() => handleAdd(manga.id)}
                             className="op add cantSelect"
@@ -114,15 +176,7 @@ function List({ mangaData, setMangaData, switchManga, gSync }) {
                         <div className="changeAba">
                           <a
                             onClick={() => {
-                              const switched = switchManga(
-                                0,
-                                manga.id,
-                                setMangaData
-                              );
-                              if (switched) {
-                                console.log("aaa");
-                                handleRemove(manga.id);
-                              }
+                              switchMangaAba(0, manga.id);
                             }}
                             className="op cantSelect"
                           >
@@ -130,15 +184,7 @@ function List({ mangaData, setMangaData, switchManga, gSync }) {
                           </a>
                           <a
                             onClick={() => {
-                              const switched = switchManga(
-                                1,
-                                manga.id,
-                                setMangaData
-                              );
-                              if (switched) {
-                                console.log("aaa");
-                                handleRemove(manga.id);
-                              }
+                              switchMangaAba(1, manga.id);
                             }}
                             className="op cantSelect"
                           >
@@ -146,15 +192,7 @@ function List({ mangaData, setMangaData, switchManga, gSync }) {
                           </a>
                           <a
                             onClick={() => {
-                              const switched = switchManga(
-                                2,
-                                manga.id,
-                                setMangaData
-                              );
-                              if (switched) {
-                                console.log("aaa");
-                                handleRemove(manga.id);
-                              }
+                              switchMangaAba(2, manga.id);
                             }}
                             className="op cantSelect"
                           >
@@ -162,15 +200,7 @@ function List({ mangaData, setMangaData, switchManga, gSync }) {
                           </a>
                           <a
                             onClick={() => {
-                              const switched = switchManga(
-                                3,
-                                manga.id,
-                                setMangaData
-                              );
-                              if (switched) {
-                                console.log("aaa");
-                                handleRemove(manga.id);
-                              }
+                              switchMangaAba(3, manga.id);
                             }}
                             className="op cantSelect"
                           >

@@ -5,6 +5,13 @@
   justify-content: space-between;
   align-items: center;
 }
+.item-hide {
+  color: bisque;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 small.ncap {
   margin-right: 15px;
 }
@@ -13,6 +20,43 @@ p.name {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: flex;
+  flex-direction: row;
+}
+p.editing-name {
+  display: flex;
+  flex-direction: row;
+}
+a.edit {
+  visibility: hidden;
+  font-size: 8pt;
+  max-height: 12px;
+  background: linear-gradient(180deg, #2e466e 5%, #415989);
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+  color: #fff;
+  padding: 4px 4px 4px 4px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #263666;
+}
+a.edit:hover {
+  background: linear-gradient(to bottom, #415989 5%, #2e466e 100%);
+  background-color: #415989;
+}
+a.edit:active {
+  position: relative;
+  top: 1px;
+}
+
+.item:hover p.name {
+  white-space: pre-wrap;
+}
+.item:hover a.show-hover {
+  visibility: visible;
+}
+.editBox:hover {
+  cursor: default;
 }
 
 .remove {
@@ -37,6 +81,10 @@ p.name {
   top: 1px;
 }
 .funcs {
+  display: flex;
+  flex-direction: row;
+}
+div.edit {
   display: flex;
   flex-direction: row;
 }
