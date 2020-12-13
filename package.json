@@ -1,6 +1,6 @@
 {
   "name": "react-test",
-  "version": "0.9.10",
+  "version": "1.2.0",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
