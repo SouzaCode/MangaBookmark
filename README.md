@@ -11,7 +11,7 @@ Only and exclusively because I am frustrated by being unable to remember the nam
 You can use the chrome store link below, or, if you want faster updates, you can clone this git or get it from releases
 https://chrome.google.com/webstore/detail/manga-bookmark/hclahhnkdechgledjlbjnldiakecdedg
 
-Download the most reacent version at realeases and install it.
+Download the most recent version at releases and install it.
 
 ## Install from releases
 
