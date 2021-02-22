@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./options.css";
-
+import Donate from "../donate/Donate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload, faFileUpload } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDownload,
+  faFileUpload,
+  faHandHoldingUsd,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Options({
   allMangasSet,
@@ -11,6 +15,10 @@ function Options({
   abasNames,
   setInOptions,
 }) {
+  const [donate, setDonate] = useState(false);
+  function handleDonate() {
+    setDonate(!donate);
+  }
   function downloadTxtFile() {
     const element = document.createElement("a");
     const file = new Blob([JSON.stringify(allMangasData)], {
@@ -39,26 +47,37 @@ function Options({
   }
   return (
     <div className="opt-container">
-      <p className="opt-title">Backup</p>
-      <div className="backupMenu">
-        <a className="bckp-btn" onClick={() => downloadTxtFile()}>
-          <FontAwesomeIcon icon={faDownload} /> Download
+      {!donate ? (
+        <>
+          <p className="opt-title">Backup</p>
+          <div className="backupMenu">
+            <a className="bckp-btn" onClick={() => downloadTxtFile()}>
+              <FontAwesomeIcon icon={faDownload} /> Download
+            </a>
+            <a
+              className="up-bckp-btn"
+              onClick={() => {
+                const element = document.getElementById("upload_bckp");
+                element.click();
+              }}
+            >
+              <FontAwesomeIcon icon={faFileUpload} /> Upload
+            </a>
+            <input
+              style={{ display: "none" }}
+              type="file"
+              id="upload_bckp"
+              onChange={handleUploadBackup}
+            />
+          </div>
+        </>
+      ) : (
+        <Donate></Donate>
+      )}
+      <div className="donate-menu">
+        <a className="donate-btn" onClick={() => handleDonate()}>
+          <FontAwesomeIcon icon={faHandHoldingUsd} /> Donate
         </a>
-        <a
-          className="up-bckp-btn"
-          onClick={() => {
-            const element = document.getElementById("upload_bckp");
-            element.click();
-          }}
-        >
-          <FontAwesomeIcon icon={faFileUpload} /> Upload
-        </a>
-        <input
-          style={{ display: "none" }}
-          type="file"
-          id="upload_bckp"
-          onChange={handleUploadBackup}
-        />
       </div>
     </div>
   );

@@ -1,9 +1,41 @@
+.donate-menu {
+  margin-top: 24px;
+  border-top: #2a6e8d;
+  border-width: 1px 0px 0px 0px;
+  border-style: solid;
+  padding-top: 16px;
+}
+
+.donate-btn {
+  font-size: 12pt;
+  max-height: -webkit-fit-content;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+  background: linear-gradient(180deg, #76a858 5%, #85bb65);
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+  color: #fff;
+  padding: 2px 8px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #85bb65;
+}
+.donate-btn:hover {
+  background: linear-gradient(to bottom, #85bb65 5%, #76a858 100%);
+  background-color: #85bb65;
+}
+.donate-btn:active {
+  position: relative;
+  top: 1px;
+}
+
 .opt-container {
   margin-left: 16px;
   margin-right: 16px;
   display: flex;
   flex-direction: column;
 }
+
 .bckp-btn {
   font-size: 12pt;
   max-height: -webkit-fit-content;

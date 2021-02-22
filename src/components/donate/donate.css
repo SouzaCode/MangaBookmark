@@ -1,0 +1,28 @@
+.donate-title {
+  font-size: 12pt;
+  color: bisque;
+  margin: 14px 16px 8px 0px;
+}
+.donate-subtitle {
+  font-size: 10pt;
+  color: bisque;
+  margin: 14px 16px 8px 0px;
+}
+.donate-options {
+}
+.donate-opt {
+  font-size: 7pt;
+  color: bisque;
+  margin: 14px 16px 8px 0px;
+  word-wrap: break-word;
+}
+.img-separator {
+  font-size: 9pt;
+  color: bisque;
+}
+.donate-img-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
