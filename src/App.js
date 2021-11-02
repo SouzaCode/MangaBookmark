@@ -19,6 +19,7 @@ function App() {
   const [mangaFinishData, setMangaFinishData] = useState([]);
   const [inOptions, setInOptions] = useState(false);
   const [newName, setNewName] = useState("");
+  const [searchName, setSearchName] = useState("");
   const [newCap, setNewCap] = useState();
   const [selectedAba, setSelectedAba] = useState(0);
   const abasNames = [
@@ -29,18 +30,18 @@ function App() {
   ];
   const googleFunctions = {
     mangaData(obj) {
-      chrome.storage.sync.set({ mangaData: obj }, function () {});
+      chrome.storage.sync.set({ mangaData: obj }, function () { });
     },
     mangaWaitingData(obj) {
-      chrome.storage.sync.set({ mangaWaitingData: obj }, function () {});
+      chrome.storage.sync.set({ mangaWaitingData: obj }, function () { });
     },
     mangaLaterData(obj) {
-      chrome.storage.sync.set({ mangaLaterData: obj }, function () {});
+      chrome.storage.sync.set({ mangaLaterData: obj }, function () { });
     },
     mangaFinishData(obj) {
       chrome.storage.sync.set(
         { mangaFinishData: mangaFinishData },
-        function () {}
+        function () { }
       );
     },
   };
@@ -85,21 +86,21 @@ function App() {
     getInitialData("mangaFinishData", setMangaFinishData);
   }, []);
   useEffect(() => {
-    chrome.storage.sync.set({ mangaData: mangaData }, function () {});
+    chrome.storage.sync.set({ mangaData: mangaData }, function () { });
   }, [mangaData]);
   useEffect(() => {
     chrome.storage.sync.set(
       { mangaWaitingData: mangaWaitingData },
-      function () {}
+      function () { }
     );
   }, [mangaWaitingData]);
   useEffect(() => {
-    chrome.storage.sync.set({ mangaLaterData: mangaLaterData }, function () {});
+    chrome.storage.sync.set({ mangaLaterData: mangaLaterData }, function () { });
   }, [mangaLaterData]);
   useEffect(() => {
     chrome.storage.sync.set(
       { mangaFinishData: mangaFinishData },
-      function () {}
+      function () { }
     );
   }, [mangaFinishData]);
   function handleNew() {
@@ -150,52 +151,63 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <small className="app-title">My Bookmarks</small>
-        {!isCreatingNew ? (
-          <>
-            <div className="createN">
-              <a onClick={handleNew} className="text-new">
-                <FontAwesomeIcon icon={faPlusCircle} /> New
-              </a>
-              {!inOptions ? (
-                <a className="config-btn" onClick={() => handleOptions()}>
-                  <FontAwesomeIcon icon={faCog} /> Options
+        <div className="header-row">
+          <small className="app-title">My Bookmarks</small>
+          {!isCreatingNew ? (
+            <>
+              <div className="createN">
+                <a onClick={handleNew} className="text-new">
+                  <FontAwesomeIcon icon={faPlusCircle} /> New
                 </a>
-              ) : (
-                <a className="config-btn" onClick={() => handleOptions()}>
-                  List&nbsp;
-                  <FontAwesomeIcon icon={faChevronLeft} color={"green"} />
-                </a>
-              )}
-            </div>
-          </>
-        ) : (
-          <form onSubmit={handleSubmitNew}>
-            <div className="creatingNew">
-              <input
-                type="text"
-                onChange={(e) => setNewName(e.target.value)}
-                name="manga"
-                placeholder="manga name"
-              ></input>
-              <input
-                type="number"
-                onChange={(e) => setNewCap(parseInt(e.target.value))}
-                name="chapter"
-                placeholder="chapter"
-              />
-            </div>
-            <button className="newmanga" type="submit">
-              +
-            </button>
-            <button
-              className="canceladd"
-              onClick={() => setIsCreatingNew(false)}
-            >
-              close
-            </button>
-          </form>
-        )}
+                {!inOptions ? (
+                  <a className="config-btn" onClick={() => handleOptions()}>
+                    <FontAwesomeIcon icon={faCog} /> Options
+                  </a>
+                ) : (
+                  <a className="config-btn" onClick={() => handleOptions()}>
+                    List&nbsp;
+                    <FontAwesomeIcon icon={faChevronLeft} color={"green"} />
+                  </a>
+                )}
+              </div>
+            </>
+          ) : (
+            <form onSubmit={handleSubmitNew}>
+              <div className="creatingNew">
+                <input
+                  type="text"
+                  onChange={(e) => setNewName(e.target.value)}
+                  name="manga"
+                  placeholder="manga name"
+                ></input>
+                <input
+                  type="number"
+                  onChange={(e) => setNewCap(parseInt(e.target.value))}
+                  name="chapter"
+                  placeholder="chapter"
+                />
+              </div>
+              <button className="newmanga" type="submit">
+                +
+              </button>
+              <button
+                className="canceladd"
+                onClick={() => setIsCreatingNew(false)}
+              >
+                close
+              </button>
+            </form>
+          )}
+        </div>
+        <div className="header-row">
+          <input
+            type="text"
+            onChange={(e) => setSearchName(e.target.value)}
+            name="searchName"
+            placeholder="Search by manga name"
+            className="searchInput"
+          ></input>
+        </div>
       </header>
       {!inOptions ? (
         <>
@@ -236,7 +248,7 @@ function App() {
           </div>
 
           <List
-            mangaData={allMangasData[abasNames[selectedAba]]}
+            mangaData={allMangasData[abasNames[selectedAba]].filter(mn => mn.nome.toLowerCase().indexOf(searchName.toLowerCase()) !== -1)}
             setMangaData={allMangasSet[abasNames[selectedAba]]}
             switchManga={switchMangas}
             gSync={googleFunctions[abasNames[selectedAba]]}
