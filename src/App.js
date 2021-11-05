@@ -199,15 +199,19 @@ function App() {
             </form>
           )}
         </div>
-        <div className="header-row">
-          <input
-            type="text"
-            onChange={(e) => setSearchName(e.target.value)}
-            name="searchName"
-            placeholder="Search by manga name"
-            className="searchInput"
-          ></input>
-        </div>
+        {!inOptions ? (
+          <div className="header-row">
+            <input
+              type="text"
+              onChange={(e) => setSearchName(e.target.value)}
+              name="searchName"
+              placeholder="Search by manga name"
+              className="searchInput"
+              autoFocus
+            ></input>
+          </div>
+        ) : (<></>)}
+
       </header>
       {!inOptions ? (
         <>
@@ -248,10 +252,11 @@ function App() {
           </div>
 
           <List
-            mangaData={allMangasData[abasNames[selectedAba]].filter(mn => mn.nome.toLowerCase().indexOf(searchName.toLowerCase()) !== -1)}
+            mangaData={allMangasData[abasNames[selectedAba]]}
             setMangaData={allMangasSet[abasNames[selectedAba]]}
             switchManga={switchMangas}
             gSync={googleFunctions[abasNames[selectedAba]]}
+            searchName={searchName}
           />
         </>
       ) : (
