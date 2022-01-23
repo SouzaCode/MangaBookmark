@@ -87,6 +87,7 @@ function App() {
         });
       }
       else{
+        setIsInitialized(true);
         chrome.storage.sync.get([dataName], function (r) {
           console.log(r);
           let data;
