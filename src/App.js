@@ -66,19 +66,44 @@ function App() {
       setMangaFinishData(obj);
     },
   };
-  function getInitialData(dataName, setFunc) {
-    chrome.storage.local.get([dataName], function (r) {
-      let data;
-      if (r[dataName] === undefined) {
-        const gSync = googleFunctions[dataName];
-        //chrome.storage.local.set(mData, function () {});
-        gSync([]);
-        data = [];
-      } else {
-        data = r[dataName];
+  async function getInitialData(dataName, setFunc) {
+    //ok... ate eu achei isso um pouco nojento kkkk
+    await chrome.storage.sync.get(["transitionToLocal"], function (r) {
+      console.log(r["transitionToLocal"]);
+      if (r["transitionToLocal"]) {
+        chrome.storage.local.get([dataName], function (r) {
+          console.log(r);
+          let data;
+          console.log("local");
+          if (r[dataName] === undefined) {
+            const gSync = googleFunctions[dataName];
+            //chrome.storage.local.set(mData, function () {});
+            gSync([]);
+            data = [];
+          } else {
+            data = r[dataName];
+          }
+          setFunc(data);
+        });
       }
-      setFunc(data);
+      else{
+        chrome.storage.sync.get([dataName], function (r) {
+          console.log(r);
+          let data;
+          console.log("sync");
+          if (r[dataName] === undefined) {
+            const gSync = googleFunctions[dataName];
+            //chrome.storage.local.set(mData, function () {});
+            gSync([]);
+            data = [];
+          } else {
+            data = r[dataName];
+          }
+          setFunc(data);
+        });
+      }
     });
+    
   }
   useEffect(async () => {
     if (!isInitialized) {
@@ -87,6 +112,10 @@ function App() {
       await getInitialData("mangaLaterData", setMangaLaterData);
       await getInitialData("mangaFinishData", setMangaFinishData);
       await setIsInitialized(true);
+      chrome.storage.sync.set(
+        { transitionToLocal: true },
+        function () {}
+      );
     }
   }, []);
   useEffect(() => {
