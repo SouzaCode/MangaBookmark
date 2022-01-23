@@ -22,6 +22,7 @@ function App() {
   const [searchName, setSearchName] = useState("");
   const [newCap, setNewCap] = useState();
   const [selectedAba, setSelectedAba] = useState(0);
+  const [isInitialized, setIsInitialized] = useState(false);
   const abasNames = [
     "mangaData",
     "mangaWaitingData",
@@ -30,18 +31,18 @@ function App() {
   ];
   const googleFunctions = {
     mangaData(obj) {
-      chrome.storage.sync.set({ mangaData: obj }, function () { });
+      chrome.storage.local.set({ mangaData: obj }, function () {});
     },
     mangaWaitingData(obj) {
-      chrome.storage.sync.set({ mangaWaitingData: obj }, function () { });
+      chrome.storage.local.set({ mangaWaitingData: obj }, function () {});
     },
     mangaLaterData(obj) {
-      chrome.storage.sync.set({ mangaLaterData: obj }, function () { });
+      chrome.storage.local.set({ mangaLaterData: obj }, function () {});
     },
     mangaFinishData(obj) {
-      chrome.storage.sync.set(
+      chrome.storage.local.set(
         { mangaFinishData: mangaFinishData },
-        function () { }
+        function () {}
       );
     },
   };
@@ -66,11 +67,11 @@ function App() {
     },
   };
   function getInitialData(dataName, setFunc) {
-    chrome.storage.sync.get([dataName], function (r) {
+    chrome.storage.local.get([dataName], function (r) {
       let data;
       if (r[dataName] === undefined) {
         const gSync = googleFunctions[dataName];
-        //chrome.storage.sync.set(mData, function () {});
+        //chrome.storage.local.set(mData, function () {});
         gSync([]);
         data = [];
       } else {
@@ -79,29 +80,39 @@ function App() {
       setFunc(data);
     });
   }
-  useEffect(() => {
-    getInitialData("mangaData", setMangaData);
-    getInitialData("mangaWaitingData", setMangaWaitingData);
-    getInitialData("mangaLaterData", setMangaLaterData);
-    getInitialData("mangaFinishData", setMangaFinishData);
+  useEffect(async () => {
+    if (!isInitialized) {
+      await getInitialData("mangaData", setMangaData);
+      await getInitialData("mangaWaitingData", setMangaWaitingData);
+      await getInitialData("mangaLaterData", setMangaLaterData);
+      await getInitialData("mangaFinishData", setMangaFinishData);
+      await setIsInitialized(true);
+    }
   }, []);
   useEffect(() => {
-    chrome.storage.sync.set({ mangaData: mangaData }, function () { });
+    if (isInitialized)
+      chrome.storage.local.set({ mangaData: mangaData }, function () {});
   }, [mangaData]);
   useEffect(() => {
-    chrome.storage.sync.set(
-      { mangaWaitingData: mangaWaitingData },
-      function () { }
-    );
+    if (isInitialized)
+      chrome.storage.local.set(
+        { mangaWaitingData: mangaWaitingData },
+        function () {}
+      );
   }, [mangaWaitingData]);
   useEffect(() => {
-    chrome.storage.sync.set({ mangaLaterData: mangaLaterData }, function () { });
+    if (isInitialized)
+      chrome.storage.local.set(
+        { mangaLaterData: mangaLaterData },
+        function () {}
+      );
   }, [mangaLaterData]);
   useEffect(() => {
-    chrome.storage.sync.set(
-      { mangaFinishData: mangaFinishData },
-      function () { }
-    );
+    if (isInitialized)
+      chrome.storage.local.set(
+        { mangaFinishData: mangaFinishData },
+        function () {}
+      );
   }, [mangaFinishData]);
   function handleNew() {
     setInOptions(false);
@@ -210,8 +221,9 @@ function App() {
               autoFocus
             ></input>
           </div>
-        ) : (<></>)}
-
+        ) : (
+          <></>
+        )}
       </header>
       {!inOptions ? (
         <>

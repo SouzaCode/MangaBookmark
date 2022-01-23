@@ -2,7 +2,7 @@
   "short_name": "MangaB",
   "name": "Manga Bookmark",
   "manifest_version": 2,
-  "version": "1.3.2",
+  "version": "1.4.0",
   "browser_action": {
     "default_popup": "index.html",
     "default_title": "Manga Bookmark",
@@ -12,6 +12,7 @@
     "192": "logo_sf192b.png"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "unlimitedStorage"
   ]
 }

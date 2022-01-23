@@ -28,7 +28,7 @@ Download the most recent version at releases and install it.
 
 # How it works
 
-It saves the information of your manga list at your google sync storage, so if you remove the extension you will lose everything that you saved.
+It saves the information of your manga list at your google local storage, so if you remove the extension you will lose everything that you saved.
 
 ## Print of the actual extension
 
