@@ -1,63 +1,69 @@
 # MangaBookmark
 
-A chrome extension to keep track of the chapters that I'm Reading
+MangaBookmark is a Chrome extension conceived out of the frustration of losing track amidst the multitude of manga chapters being read. Acting as a personal bookmark manager, it allows readers to keep organized notes of their reading progress, ensuring they always know where they left off.
 
-# Why am I creating this?
+## 🌟 Features
 
-Only and exclusively because I am frustrated by being unable to remember the name and chapters of the manga that I left accumulating and then read
+- **Offline Usage:** Fully operational without an internet connection.
+- **Custom Entries:** Suitable for tracking progress in any reading materials, not limited to mangas.
+- **Local Storage:** Information securely saved in Google Chrome's local storage.
+- **Backup and Restore:** Transfer bookmarks between devices using a downloadable JSON file.
+- **Edit and Remove:** Facilitates easy management of bookmarks.
 
-# How to get it?
+## 🚀 Installation
 
-You can use the chrome store link below, or, if you want faster updates, you can clone this git or get it from releases
-https://chrome.google.com/webstore/detail/manga-bookmark/hclahhnkdechgledjlbjnldiakecdedg
+Detailed instructions are provided for installing the extension directly from the Chrome Web Store or manually from releases or cloning.
 
-Download the most recent version at releases and install it.
+## 🖥 How It Works
 
-## Install from releases
+MangaBookmark is designed for simplicity and offline functionality. It allows for manual entries, enabling users to keep track of their reading progress across various materials such as mangas or books.
 
-- Unpackage the file
-- Go to the extension manager tab at chrome an let the dev option active
-- "load unpacked" the build folder and be happy
+- **Adding Entries:** Mangas can be added manually, allowing numeric entry for the chapters, accommodating mid-reading starts.
+  
+- **Organizing Entries:** Entries are automatically categorized under the "Reading" list. Users can move entries between different lists such as "Reading", "Waiting", "Later", and "Finished" for better organization.
+  
+- **Managing Entries:** Each entry can be updated, allowing increment or decrement of chapter numbers, editing of names, and deletion of the entry.
+  
+- **Customizing List:** The list is flexible. Users can drag entries to rearrange the order, ensuring that frequently read mangas are easily accessible.
+  
+- **Data Management:** In the options, there are features to download a JSON file containing your manga information or upload a previously downloaded JSON file for data restoration or transfer between devices.
 
-## Install from cloning
 
-- $ npm i
-- $ npm run build
-- Go to the extension manager tab at chrome an let the dev option active
-- "load unpacked" the build folder and be happy
 
-# How it works
+(I'll try to let it prettier in the future, feel free to suggest a new design 🥰)
 
-It saves the information of your manga list at your google local storage, so if you remove the extension you will lose everything that you saved.
+![MangaBookmark Interface](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/v1.0/p4.png) 
+![MangaBookmark Interface](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/v1.0/p6.png)
 
-## Print of the actual extension
 
-       (I'll try to let it prettier in the future, feel free to suggest a new design 🥰)
+## 🛠 Technologies 
 
-![alt text](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/v1.0/p4.png) &nbsp;&nbsp; &nbsp;&nbsp; ![alt text](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/v1.0/p6.png)
+MangaBookmark is built using React Native and JavaScript, ensuring a smooth and responsive user experience.
 
-# Want to donate and help the development?
+## 🤝 Contributing
 
-Oh thats awesome!! Thank you!
+We welcome contributions! Whether it’s improving design aesthetics, adding new features such as Google Drive synchronization, or reporting bugs and issues, your involvement is greatly appreciated.
 
-You can transfer ANY quantity you want to one of my addresses bellow 🥰
+- **Issues and Bugs:** If you encounter any problems or bugs, please report them on GitHub, ensuring to tag @Codewracker, or email at dev.rodrigofs@gmail.com with the title being "MangaBookmark: <Subject>".
 
-Paypal:
+## 💖 Support the Development
 
-[![](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p3.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEFYEJDSJTG7W") &nbsp;&nbsp; &nbsp;&nbsp;or &nbsp;&nbsp; &nbsp;&nbsp;![alt text](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/QR%20Code.png)
+Supporting the development of MangaBookmark is highly appreciated. Donations, big or small, contribute significantly to the continuous improvement and upgrading of the extension.
 
-Bitcoin: 3EcS6jC3LEu6TxrGf1gy6RDU84JUeigHPS
+- **Paypal:** 
+   [![Donate via Paypal](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/p3.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEFYEJDSJTG7W)
+   or scan the QR code: 
+   ![Paypal QR Code](https://raw.githubusercontent.com/CodeWracker/MangaBookmark-Chrome-Extension/develop/doc_assets/QR%20Code.png)
 
-Monero: 88GEUNi69R5EHHcJJ7r7VUZq7NAPRESvQD7NncoEyXvz6LW2oWsBa2QWyD7PC66W3NbtSxfp8WrF4K3ZFCB9AgNR5Jz6dUc
+- **Cryptocurrencies:** Donations are also accepted in various cryptocurrencies.
+  - Bitcoin: `3EcS6jC3LEu6TxrGf1gy6RDU84JUeigHPS`
+  - Monero: `88GEUNi69R5EHHcJJ7r7VUZq7NAPRESvQD7NncoEyXvz6LW2oWsBa2QWyD7PC66W3NbtSxfp8WrF4K3ZFCB9AgNR5Jz6dUc`
+  - Litecoin: `MKxfVcFP25saWHQiS2oiGAap3Yap3LmNiU`
+  - Dogecoin: `D7t9nvfjj73M7kgxMNr35cD9XzCA6cbYsy`
+  - Ethereum: `0x1fcb76c03a319bac659f64bb1f8199f0be3d233a`
+  - Ripple: `rnW8je5SsuFjkMSWkgfXvqZH3gLTpXxfFH`
 
-Litecoin: MKxfVcFP25saWHQiS2oiGAap3Yap3LmNiU
 
-Dogecoin: D7t9nvfjj73M7kgxMNr35cD9XzCA6cbYsy
+## 🎬 YouTube Channel
 
-Ethereum: 0x1fcb76c03a319bac659f64bb1f8199f0be3d233a
-
-Ripple: rnW8je5SsuFjkMSWkgfXvqZH3gLTpXxfFH
-
-# Follow me on my YouTube Channel
-
-https://www.youtube.com/channel/UCKuroQvLYe--kKd8kJ6GBYg
+For more insights and discussions, follow the [YouTube Channel](https://www.youtube.com/channel/UCKuroQvLYe--kKd8kJ6GBYg).
